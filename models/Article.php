@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 
+use yii\helpers\StringHelper;
+
 /**
  * This is the model class for table "entries".
  *
@@ -75,4 +77,20 @@ class Article extends \yii\db\ActiveRecord
             'url' => $this->title_en . '.html',
         ]);
     }
+
+    public function getImage()
+    {
+        return $this->hasOne(ArticleImage::class, ['id' => 'image_id']);
+    }
+
+    public function getThumb()
+    {
+        return Yii::getAlias('@web') . '/uploads/entries/thumb_480x480_' . $this->image->name;
+    }
+
+    public function getSummary()
+    {
+        return StringHelper::truncate($this->body_en, 200);
+    }
+
 }

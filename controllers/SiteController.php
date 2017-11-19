@@ -12,6 +12,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Apartment;
 use app\models\Article;
+use app\models\User;
 
 class SiteController extends Controller
 {
@@ -69,6 +70,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->request->isAjax) {
+            $user = User::findByUsername($_POST['username']);
+            return Yii::$app->user->login($user);
+        }
+
         $where = [
             'a.is_special_offer' => 1,
             'a.deleted' => 0,

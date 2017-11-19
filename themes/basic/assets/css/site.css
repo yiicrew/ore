@@ -6,6 +6,8 @@
 html,
 body {
     height: 100%;
+    font-family: 'Roboto', sans-serif;
+    color: #333f48;
 }
 
 .page-content {
@@ -93,8 +95,6 @@ a.desc:after {
 
 /* Components 
 ================================== */
-
-
 /* Button */
 .btn {}
 
@@ -102,5 +102,68 @@ a.desc:after {
 	color: white;
 }
 
+/* Article */
+.article {
+    display: flex;
+}
 
+.article-news {
+    position: relative;
+}
+
+.article-news .article-timestamp {
+  font-size: 12px;
+  color: #969fa9;
+}
+
+.article-news .article-media {
+    margin-right: 30px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.article-news .article-title {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.article-news .article-summary {
+    font-weight: 400;
+    font-size: 16px;
+    color: #697684;
+    margin: 7.5px 0;
+}
+
+.article-news .article-link {
+    display: block;
+    text-indent: 200%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    font-size: 0;
+    opacity: 0;
+}
+
+.article-news:hover .article-title  {
+}
+
+/* Navbar */
+.navbar {}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+/* News */
+.news {
+  margin-bottom: 15px;
+}
+
+.news-heading {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
 
