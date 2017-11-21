@@ -24,15 +24,6 @@ body {
     padding-top: 20px;
 }
 
-.jumbotron {
-    text-align: center;
-    background-color: transparent;
-}
-
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-}
 
 .not-set {
     color: #c55;
@@ -109,18 +100,26 @@ a.desc:after {
 
 .article-news {
     position: relative;
+    margin-bottom: 30px;
 }
 
-.article-news .article-timestamp {
-  font-size: 12px;
+.article-news .article-date {
+  font-family: "Inconsolata", monospace;
+  font-size: 14px;
   color: #969fa9;
+  margin-bottom: 7.5px;
+  display: inline-block;
 }
 
 .article-news .article-media {
     margin-right: 30px;
     height: 150px;
+    min-width: 220px;
+    width: 220px;
     overflow: hidden;
 }
+
+.article-news .article-image { }
 
 .article-news .article-title {
     font-size: 24px;
@@ -128,10 +127,9 @@ a.desc:after {
 }
 
 .article-news .article-summary {
-    font-weight: 400;
+    font-weight: 300;
     font-size: 16px;
     color: #697684;
-    margin: 7.5px 0;
 }
 
 .article-news .article-link {
@@ -147,6 +145,11 @@ a.desc:after {
 }
 
 .article-news:hover .article-title  {
+  color: #e4002b;
+}
+
+.article-summary p {
+  margin-bottom: 0;
 }
 
 /* Navbar */
@@ -166,4 +169,7 @@ a.desc:after {
   font-weight: 700;
   margin-bottom: 30px;
 }
+
+/* Hero */
+.hero {}
 

@@ -90,7 +90,14 @@ class Article extends \yii\db\ActiveRecord
 
     public function getSummary()
     {
-        return StringHelper::truncate($this->body_en, 200);
+        return StringHelper::truncate($this->body_en, 150);
+    }
+
+    public function getPublishedAt()
+    {
+        return strtoupper(
+            date('d M Y', strtotime($this->date_created))
+        );
     }
 
 }
