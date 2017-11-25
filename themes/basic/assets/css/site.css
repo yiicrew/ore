@@ -14,7 +14,8 @@ body {
     min-height: 100%;
     height: auto;
     margin: 0 auto -60px;
-    padding: 70px 15px 60px;
+    padding-top: 55px;
+    padding-bottom: 60px;
 }
 
 .page-footer {
@@ -170,6 +171,29 @@ a.desc:after {
   margin-bottom: 30px;
 }
 
+/* Search */
+.search {
+  background-color: rgba(0,0,0,0.5);
+  padding: 15px;
+  border-radius: 3px;
+}
+
+.search-heading {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
 /* Hero */
-.hero {}
+.hero {
+  height: 500px;
+  min-height: 500px;
+  background-color: #333;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
 
