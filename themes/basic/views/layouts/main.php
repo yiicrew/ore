@@ -37,7 +37,7 @@ BasicAsset::register($this);
 
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => Html::img('/uploads/ore.svg', ['width' => 70]), //Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'containerOptions' => ['class' => 'navbar-collapse justify-content-end'],
         'options' => [

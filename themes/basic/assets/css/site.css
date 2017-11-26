@@ -161,6 +161,11 @@ a.desc:after {
     font-weight: 700;
 }
 
+/* Button */
+.btn {
+  border-radius: 3px;
+}
+
 /* News */
 .news {
   margin-bottom: 15px;
@@ -215,6 +220,10 @@ a.desc:after {
   padding: 7.5px 30px;
   font-size: 18px;
   font-weight: 300;
+}
+
+.search-btn:hover {
+  background-color: #a30000;
 }
 
 
