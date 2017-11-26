@@ -1,12 +1,15 @@
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto', sans-serif;
 }
 
 html,
 body {
     height: 100%;
     font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
     color: #333f48;
 }
 
@@ -14,7 +17,6 @@ body {
     min-height: 100%;
     height: auto;
     margin: 0 auto -60px;
-    padding-top: 55px;
     padding-bottom: 60px;
 }
 
@@ -106,7 +108,6 @@ a.desc:after {
 
 .article-news .article-date {
   font-family: "Inconsolata", monospace;
-  font-size: 14px;
   color: #969fa9;
   margin-bottom: 7.5px;
   display: inline-block;
@@ -114,22 +115,22 @@ a.desc:after {
 
 .article-news .article-media {
     margin-right: 30px;
-    height: 150px;
-    min-width: 220px;
-    width: 220px;
+    height: 120px;
+    min-width: 200px;
+    width: 200px;
     overflow: hidden;
 }
 
 .article-news .article-image { }
 
 .article-news .article-title {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 400;
+    margin-bottom: 3px;
 }
 
 .article-news .article-summary {
     font-weight: 300;
-    font-size: 16px;
     color: #697684;
 }
 
@@ -166,7 +167,7 @@ a.desc:after {
 }
 
 .news-heading {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
   margin-bottom: 30px;
 }
@@ -174,15 +175,48 @@ a.desc:after {
 /* Search */
 .search {
   background-color: rgba(0,0,0,0.5);
-  padding: 15px;
+  padding: 30px;
   border-radius: 3px;
 }
 
 .search-heading {
   margin-bottom: 15px;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 300;
 }
+
+.search-form {}
+
+.search-form-group {
+  display: flex;
+  width: 100%;
+}
+
+.search-type {
+  height: 45px !important;
+  padding: 0 15px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.search-query {
+  flex: 1;
+  margin-right: 7.5px;
+  height: 45px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.search-btn {
+  height: 45px;
+  background-color: #e4002b;
+  color: white;
+  cursor: pointer;
+  padding: 7.5px 30px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
 
 /* Hero */
 .hero {

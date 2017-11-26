@@ -85,7 +85,11 @@ class Article extends \yii\db\ActiveRecord
 
     public function getThumb()
     {
-        return Yii::getAlias('@web') . '/uploads/entries/thumb_480x480_' . $this->image->name;
+        $image = '';
+        if (isset($this->image)) {
+            $image = $this->image->name;
+        }
+        return Yii::getAlias('@web') . '/uploads/entries/thumb_480x480_' . $image;
     }
 
     public function getSummary()
