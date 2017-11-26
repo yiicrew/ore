@@ -81,7 +81,7 @@ class SiteController extends Controller
             'a.active' => Apartment::STATUS_ACTIVE
         ];
 
-        $latestNews = Article::find()->latestNews()->all();
+        
 
         // if $userId is available include userid in $where
         $apparmentQuery = (new Query)->from('apartment a')
@@ -93,9 +93,7 @@ class SiteController extends Controller
         // echo "<pre>";
         // print_r($apparmentQuery);
         // die;
-        return $this->render('index', [
-            'latestNews' => $latestNews
-        ]);
+        return $this->render('index');
     }
 
     /**
