@@ -15,10 +15,11 @@ $this->title = Yii::$app->name . ' - Real Estate Software';
                 <h1 class="search-heading">Search properties for sale</h1>
                 <form class="search-form form-inline">
                     <div class="form-group search-form-group">
-                        <select class="form-control search-type">
-                            <option>Buy</option>
+                        <select class="form-control search-type" name="type">
+                            <option value="buy">Buy</option>
+                            <option value="rent">Rent</option>
                         </select>
-                        <input type="text" class="form-control search-query" placeholder="Search by location or keyword">
+                        <input type="text" class="form-control search-query" name="q" placeholder="Search by location or keyword">
                         <button type="submit" class="btn search-btn">Search</button>
                     </div>
                 </form>
