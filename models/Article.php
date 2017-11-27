@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-
 use yii\helpers\StringHelper;
 
 /**
@@ -89,6 +88,7 @@ class Article extends \yii\db\ActiveRecord
         if (isset($this->image)) {
             $image = $this->image->name;
         }
+
         return Yii::getAlias('@web') . '/uploads/entries/thumb_480x480_' . $image;
     }
 
@@ -103,5 +103,4 @@ class Article extends \yii\db\ActiveRecord
             date('d M Y', strtotime($this->date_created))
         );
     }
-
 }

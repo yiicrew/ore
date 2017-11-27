@@ -3,16 +3,13 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
+use app\models\User;
 use yii\web\Response;
-use yii\filters\VerbFilter;
-use yii\db\Query;
+use yii\web\Controller;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\Apartment;
-use app\models\Article;
-use app\models\User;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 class SiteController extends Controller
 {
@@ -29,7 +26,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['index', 'contact', 'about'],
                         'allow' => true,
-                        'roles' => ['?']
+                        'roles' => ['?'],
                     ],
                     [
                         'actions' => ['index', 'logout', 'contact'],
@@ -72,27 +69,25 @@ class SiteController extends Controller
     {
         if (Yii::$app->request->isAjax) {
             $user = User::findByUsername($_POST['username']);
+
             return Yii::$app->user->login($user);
         }
 
+        /*
         $where = [
-            'a.is_special_offer' => 1,
-            'a.deleted' => 0,
-            'a.active' => Apartment::STATUS_ACTIVE
+        'a.is_special_offer' => 1,
+        'a.deleted' => 0,
+        'a.active' => Apartment::STATUS_ACTIVE
         ];
 
-        
-
         // if $userId is available include userid in $where
-        $apparmentQuery = (new Query)->from('apartment a')
-            ->select('a.id')
-            ->where($where)
-            ->limit(10)
-            ->all();
+        $apparments = (new Query)->from('apartment a')
+        ->select('a.id')
+        ->where($where)
+        ->limit(10)
+        ->all();
+         */
 
-        // echo "<pre>";
-        // print_r($apparmentQuery);
-        // die;
         return $this->render('index');
     }
 
@@ -111,6 +106,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
+
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -141,6 +137,7 @@ class SiteController extends Controller
 
             return $this->refresh();
         }
+
         return $this->render('contact', [
             'model' => $model,
         ]);

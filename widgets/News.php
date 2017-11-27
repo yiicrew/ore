@@ -1,4 +1,5 @@
 <?php
+
 namespace app\widgets;
 
 use Yii;
@@ -6,7 +7,6 @@ use app\models\Article;
 
 class News extends \yii\bootstrap\Widget
 {
-    
     public $limit = 3;
 
     /**
@@ -23,7 +23,7 @@ class News extends \yii\bootstrap\Widget
         }
 
         return $this->render('news', [
-            'articles' => $articles
+            'articles' => $articles,
         ]);
     }
 }
