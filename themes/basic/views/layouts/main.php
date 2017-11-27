@@ -41,7 +41,7 @@ BasicAsset::register($this);
         'brandUrl' => Yii::$app->homeUrl,
         'containerOptions' => ['class' => 'navbar-collapse justify-content-end'],
         'options' => [
-            'class' => 'navbar-dark navbar-expand-lg bg-dark fixed-top',
+            'class' => 'navbar-dark navbar-expand-lg fixed-top',
         ],
     ]);
     echo Nav::widget([

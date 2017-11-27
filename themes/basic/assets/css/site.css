@@ -155,7 +155,9 @@ a.desc:after {
 }
 
 /* Navbar */
-.navbar {}
+.navbar {
+  background: transparent;
+}
 
 .navbar-brand {
     font-weight: 700;

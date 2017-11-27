@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use yii\helpers\StringHelper;
+use yii\helpers\Inflector;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "entries".
@@ -72,8 +74,8 @@ class Article extends \yii\db\ActiveRecord
 
     public function getUrl()
     {
-        return Yii::$app->urlManager->createAbsoluteUrl('/entries/main/view', [
-            'url' => $this->title_en . '.html',
+        return Url::toRoute(['article/default/view', 
+            'slug' => Inflector::slug($this->title_en)
         ]);
     }
 

@@ -3,9 +3,10 @@
 namespace app\widgets;
 
 use Yii;
+use yii\bootstrap\Widget;
 use app\models\Article;
 
-class News extends \yii\bootstrap\Widget
+class News extends Widget
 {
     public $limit = 3;
 
