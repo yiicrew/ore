@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "apartment".
@@ -154,5 +155,27 @@ class Apartment extends \yii\db\ActiveRecord
     public static function find()
     {
         return new ApartmentQuery(get_called_class());
+    }
+
+    public function getImages()
+    {
+        return $this->hasMany(Image::class, ['id' => 'id_object'])
+            ->orderBy('is_main DESC, sorter');
+    }
+
+    public function getImage()
+    {
+        return $this->hasOne(Image::class, ['id_object' => 'id'])
+            ->where(['is_main' => true]);
+    }
+
+    public function getTitle()
+    {
+        return StringHelper::truncate($this->title_en, 20);
+    }
+
+    public function getDescriptionShort()
+    {
+        return StringHelper::truncate($this->description_en, 30);
     }
 }

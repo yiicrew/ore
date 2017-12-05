@@ -9,10 +9,14 @@ namespace app\models;
  */
 class ApartmentQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
+    public function active()
     {
-        return $this->andWhere('[[status]]=1');
-    }*/
+        return $this->where([
+            'deleted' => 0,
+            'active' => Apartment::STATUS_ACTIVE,
+            'owner_active' => 1 // @TODO: move this to a constant
+        ]);
+    }
 
     /**
      * @inheritdoc

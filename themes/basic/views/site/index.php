@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use app\widgets\News;
+use app\widgets\Apartment;
 
 $this->title = Yii::$app->name . ' - Real Estate Software';
 ?>
@@ -29,7 +30,12 @@ $this->title = Yii::$app->name . ' - Real Estate Software';
 </div>
 
 <div class="container">
+    <?= Apartment::widget([
+        'limit' => 12
+    ]) ?>
+
     <?= News::widget([
         "limit" => 2
     ]) ?>
+
 </div>
