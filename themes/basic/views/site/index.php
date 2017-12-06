@@ -16,12 +16,19 @@ $this->title = Yii::$app->name . ' - Real Estate Software';
                 <h1 class="search-heading">Search properties for sale</h1>
                 <form class="search-form form-inline">
                     <div class="form-group search-form-group">
-                        <select class="form-control search-type" name="type">
+                        <input type="text" class="form-control search-query" name="q" placeholder="Search by location or keyword">
+                        <button type="submit" class="btn search-btn">Search</button>
+                    </div>
+                    <div class="form-group search-form-group">
+                        <select class="form-control search-for" name="type">
                             <option value="buy">Buy</option>
                             <option value="rent">Rent</option>
                         </select>
-                        <input type="text" class="form-control search-query" name="q" placeholder="Search by location or keyword">
-                        <button type="submit" class="btn search-btn">Search</button>
+
+                        <select class="form-control search-property-type" name="type">
+                            <option value="buy">Buy</option>
+                            <option value="rent">Rent</option>
+                        </select>
                     </div>
                 </form>
             </div>
@@ -31,7 +38,7 @@ $this->title = Yii::$app->name . ' - Real Estate Software';
 
 <div class="container">
     <?= Apartment::widget([
-        'limit' => 12
+        'limit' => 9
     ]) ?>
 
     <?= News::widget([

@@ -22,6 +22,7 @@ class Apartment extends Widget
         $apartments = \app\models\Apartment::find()
             ->limit($this->limit)
             ->active()
+            ->orderBy(['price' => SORT_DESC])
             ->all();
 
         $heading = $this->heading ?? Yii::t('app', 'Featured Properties');
