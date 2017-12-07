@@ -4,8 +4,9 @@ namespace app\widgets;
 use Yii;
 use yii\bootstrap\Widget;
 use app\models\User;
+use app\models\Listing;
 
-class Apartment extends Widget
+class FeaturedListings extends Widget
 {
     /**
      * @var Limit the number of rows
@@ -19,7 +20,7 @@ class Apartment extends Widget
 
     public function run()
     {
-        $apartments = \app\models\Apartment::find()
+        $listings = Listing::find()
             ->limit($this->limit)
             ->active()
             ->orderBy(['price' => SORT_DESC])
@@ -27,8 +28,8 @@ class Apartment extends Widget
 
         $heading = $this->heading ?? Yii::t('app', 'Featured Properties');
 
-        return $this->render('apartment', [
-            'apartments' => $apartments,
+        return $this->render('listing', [
+            'listings' => $listings,
             'heading' => $heading
         ]);
     }

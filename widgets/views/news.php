@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 
 ?>
-<section class="news">
-    <h2 class="news-heading"><?= Yii::t('app', 'Latest Property News') ?></h2>
-    <div class="news-articles">
+<section class="section news">
+    <h2 class="section-heading"><?= Yii::t('app', 'Latest Property News') ?></h2>
+    <div class="section-body news-articles">
     <?php foreach ($articles as $article): ?>
         <article class="article article-news">
             <div class="article-media">

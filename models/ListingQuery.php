@@ -3,24 +3,24 @@
 namespace app\models;
 
 /**
- * This is the ActiveQuery class for [[Apartment]].
+ * This is the ActiveQuery class for [[Listing]].
  *
- * @see Apartment
+ * @see Listing
  */
-class ApartmentQuery extends \yii\db\ActiveQuery
+class ListingQuery extends \yii\db\ActiveQuery
 {
     public function active()
     {
         return $this->where([
             'deleted' => 0,
-            'active' => Apartment::STATUS_ACTIVE,
+            'active' => Listing::STATUS_ACTIVE,
             'owner_active' => 1 // @TODO: move this to a constant
         ]);
     }
 
     /**
      * @inheritdoc
-     * @return Apartment[]|array
+     * @return Listing[]|array
      */
     public function all($db = null)
     {
@@ -29,7 +29,7 @@ class ApartmentQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Apartment|array|null
+     * @return Listing|array|null
      */
     public function one($db = null)
     {

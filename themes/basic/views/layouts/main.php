@@ -45,15 +45,30 @@ BasicAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']]
-            )
+            ['label' => 'Buy', 'url' => ['/site/index']],
+            ['label' => 'Rent', 'url' => ['/site/about']],
+            ['label' => 'Special offers', 'url' => ['/site/about']],
+            ['label' => 'News', 'url' => ['/site/about']],
+            ['label' => 'Find agents', 'url' => ['/site/contact']],
+            ['label' => 'List your property', 'url' => ['/site/about']],
+            ['label' => 'Contact us', 'url' => ['/site/about']],
+            '<li class="nav-item nav-divider">&nbsp</li>',
+            [
+                'label' => 'Login', 
+                'url' => ['/site/login'], 
+                'visible' => Yii::$app->user->isGuest
+            ],
+            [
+                'label' => 'Sign Up', 
+                'url' => ['/site/signup'],
+                'visible' => Yii::$app->user->isGuest,
+                'linkOptions' => ['class' => 'btn btn-primary navbar-btn']
+            ],
+            [
+                'label' => 'Logout', 'url' => ['/site/logout'], 
+                'visible' => !Yii::$app->user->isGuest,
+                'linkOptions' => ['data-method' => 'post', 'class' => 'btn btn-sm btn-primary']
+            ]
         ],
     ]);
     NavBar::end();

@@ -58,9 +58,8 @@ use yii\helpers\StringHelper;
  * @property integer $deleted
  * @property integer $parent_id
  */
-class Apartment extends \yii\db\ActiveRecord
+class Listing extends \yii\db\ActiveRecord
 {
-
     const STATUS_INACTIVE = -1;
     const STATUS_DRAFT = 0;
     const STATUS_ACTIVE = 1;
@@ -150,11 +149,11 @@ class Apartment extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return ApartmentQuery the active query used by this AR class.
+     * @return ListingQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new ApartmentQuery(get_called_class());
+        return new ListingQuery(get_called_class());
     }
 
     public function getImages()
