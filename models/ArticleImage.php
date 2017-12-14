@@ -8,8 +8,8 @@ use Yii;
  * This is the model class for table "entries_image".
  *
  * @property integer $id
- * @property string $name
- * @property string $date_created
+ * @property string $file_path
+ * @property string $created_at
  */
 class ArticleImage extends \yii\db\ActiveRecord
 {
@@ -27,8 +27,8 @@ class ArticleImage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date_created'], 'safe'],
-            [['name'], 'string', 'max' => 255],
+            [['created_at'], 'safe'],
+            [['file_path'], 'string', 'max' => 255],
         ];
     }
 
@@ -39,8 +39,8 @@ class ArticleImage extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'date_created' => Yii::t('app', 'Date Created'),
+            'file_path' => Yii::t('app', 'File Path'),
+            'created_at' => Yii::t('app', 'Date Created'),
         ];
     }
 

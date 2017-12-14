@@ -71,6 +71,6 @@ class ListingImage extends \yii\db\ActiveRecord
 
     public function __toString()
     {
-        return Url::to('/uploads/objects/' . $this->listing_id . '/modified/full_' . $this->public_file_path);
+        return Url::to('/uploads/listings/' . $this->listing_id . '/modified/full_' . $this->public_file_path);
     }
 }

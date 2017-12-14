@@ -7,7 +7,7 @@ use yii\helpers\Html;
     <h2 class="section-heading"><?= Yii::t('app', 'Latest Property News') ?></h2>
     <div class="section-body news-articles">
     <?php foreach ($articles as $article): ?>
-        <article class="article article-news">
+        <article class="article article-news" data-id="<?= $article->id ?>">
             <div class="article-media">
                 <?= Html::img($article->thumb, [
                     'width' => 250,

@@ -79,17 +79,17 @@ class Article extends \yii\db\ActiveRecord
 
     public function getImage()
     {
-        return $this->hasOne(ArticleImage::class, ['id' => 'image_id']);
+        return $this->hasOne(ArticleImage::class, ['article_id' => 'id']);
     }
 
     public function getThumb()
     {
         $image = '';
         if (isset($this->image)) {
-            $image = $this->image->name;
+            $image = $this->image->file_path;
         }
 
-        return Yii::getAlias('@web') . '/uploads/entries/thumb_480x480_' . $image;
+        return Yii::getAlias('@web') . '/uploads/articles/thumb_480x480_' . $image;
     }
 
     public function getSummary()
