@@ -18,7 +18,7 @@ class ArticleImage extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'entries_image';
+        return 'article_images';
     }
 
     /**

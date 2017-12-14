@@ -67,11 +67,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        if (Yii::$app->request->isAjax) {
-            $user = User::findByUsername($_POST['username']);
+        $this->layout = 'column1';
 
-            return Yii::$app->user->login($user);
-        }
+//         $feed = Yii::$app->simplepie->config([
+//             'set_feed_url' => 'http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml',
+//         ])->parse();
+        
+// echo "<pre>";
+//         var_dump(
+//         $feed
+//         );
+//         die;
 
         /*
         $where = [
@@ -87,7 +93,6 @@ class SiteController extends Controller
         ->limit(10)
         ->all();
          */
-
         return $this->render('index');
     }
 

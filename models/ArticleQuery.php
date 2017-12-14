@@ -19,9 +19,7 @@ class ArticleQuery extends \yii\db\ActiveQuery
         // @TODO: make limit configurable from config or admin
         return $this->andWhere(['category_id' => ArticleCategory::NEWS])
             ->limit(4)
-            ->orderBy([
-                'date_created' => SORT_DESC
-            ]);
+            ->orderBy(['created_at' => SORT_DESC]);
             //->with('image');
     }
 

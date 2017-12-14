@@ -7,8 +7,7 @@
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
-
-  /*font-family: 'Roboto', sans-serif;*/
+  font-family: 'Roboto', sans-serif;
 }
 
 html,
@@ -23,7 +22,7 @@ body {
   min-height: 100%;
   height: auto;
   margin: 0 auto -60px;
-  padding-bottom: 60px;
+  padding: 50px 0 60px 0;
 }
 
 .page-footer {
@@ -170,7 +169,7 @@ a.desc:after {
 }
 
 .article-news:hover .article-title {
-  color: #e4002b;
+  color: #0056b3;
 }
 
 .article-summary p {
@@ -252,6 +251,7 @@ a.desc:after {
   font-weight: 300;
   width: auto;
   margin-right: 15px;
+  -webkit-appearance: none;
 }
 
 .search-btn {

@@ -12,9 +12,8 @@ class ListingQuery extends \yii\db\ActiveQuery
     public function active()
     {
         return $this->where([
-            'deleted' => 0,
-            'active' => Listing::STATUS_ACTIVE,
-            'owner_active' => 1 // @TODO: move this to a constant
+            'status' => Listing::STATUS_ACTIVE,
+            'owner_active' => Listing::STATUS_ACTIVE
         ]);
     }
 

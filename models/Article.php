@@ -11,15 +11,14 @@ use yii\helpers\Url;
  * This is the model class for table "entries".
  *
  * @property integer $id
- * @property integer $active
  * @property integer $category_id
- * @property string $tags
- * @property integer $image_id
- * @property string $date_created
- * @property string $date_updated
- * @property string $body_en
+ * @property integer $status
+ * @property string $created_at
+ * @property string $upated_at
  * @property string $title_en
+ * @property string $body_en
  * @property string $announce_en
+ * @property string $tags_en
  */
 class Article extends \yii\db\ActiveRecord
 {
@@ -28,7 +27,7 @@ class Article extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'entries';
+        return 'articles';
     }
 
     /**
@@ -37,9 +36,9 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['active', 'category_id', 'image_id'], 'integer'],
-            [['tags', 'body_en', 'announce_en'], 'string'],
-            [['date_created', 'date_updated'], 'safe'],
+            [['status', 'category_id'], 'integer'],
+            [['tags_en', 'body_en', 'announce_en'], 'string'],
+            [['created_at', 'upated_at'], 'safe'],
             [['title_en'], 'string', 'max' => 255],
         ];
     }
@@ -51,15 +50,14 @@ class Article extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'active' => Yii::t('app', 'Active'),
+            'status' => Yii::t('app', 'Status'),
             'category_id' => Yii::t('app', 'Category ID'),
-            'tags' => Yii::t('app', 'Tags'),
-            'image_id' => Yii::t('app', 'Image ID'),
-            'date_created' => Yii::t('app', 'Date Created'),
-            'date_updated' => Yii::t('app', 'Date Updated'),
+            'created_at' => Yii::t('app', 'Date Created'),
+            'upated_at' => Yii::t('app', 'Date Updated'),
             'body_en' => Yii::t('app', 'Body En'),
             'title_en' => Yii::t('app', 'Title En'),
             'announce_en' => Yii::t('app', 'Announce En'),
+            'tags_en' => Yii::t('app', 'Tags'),
         ];
     }
 
@@ -102,7 +100,7 @@ class Article extends \yii\db\ActiveRecord
     public function getPublishedAt()
     {
         return strtoupper(
-            date('d M Y', strtotime($this->date_created))
+            date('d M Y', strtotime($this->created_at))
         );
     }
 }

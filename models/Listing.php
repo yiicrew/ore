@@ -9,17 +9,17 @@ use yii\helpers\StringHelper;
  * This is the model class for table "apartment".
  *
  * @property integer $id
- * @property integer $type
- * @property integer $obj_type_id
- * @property integer $loc_country
- * @property integer $loc_region
- * @property integer $loc_city
+ * @property integer $type_id
+ * @property integer $category_id
+ * @property integer $country
+ * @property integer $region
+ * @property integer $city
  * @property integer $city_id
- * @property integer $visits
- * @property string $date_updated
- * @property string $date_created
- * @property string $date_manual_updated
- * @property string $date_end_activity
+ * @property integer $view_count
+ * @property string $updated_at
+ * @property string $created_at
+ * @property string $manual_updated_at
+ * @property string $activity_end_at
  * @property integer $activity_always
  * @property integer $is_price_poa
  * @property integer $price
@@ -51,17 +51,16 @@ use yii\helpers\StringHelper;
  * @property string $exchange_to_en
  * @property string $note
  * @property string $phone
- * @property string $autoVKPostId
- * @property string $autoFBPostId
- * @property string $autoTwitterPostId
+ * @property string $vk_post_id
+ * @property string $facebook_post_id
+ * @property string $twitter_post_id
  * @property integer $count_img
- * @property integer $deleted
+ * @property integer $is_deleted
  * @property integer $parent_id
  */
 class Listing extends \yii\db\ActiveRecord
 {
-    const STATUS_INACTIVE = -1;
-    const STATUS_DRAFT = 0;
+    const STATUS_DRAFT = -1;
     const STATUS_ACTIVE = 1;
 
     /**
@@ -69,7 +68,7 @@ class Listing extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'apartment';
+        return 'listings';
     }
 
     /**
@@ -78,14 +77,14 @@ class Listing extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'obj_type_id', 'loc_country', 'loc_region', 'loc_city', 'city_id', 'visits', 'activity_always', 'is_price_poa', 'price', 'price_to', 'num_of_rooms', 'floor', 'floor_total', 'window_to', 'living_conditions', 'services', 'active', 'rating', 'is_special_offer', 'price_type', 'sorter', 'owner_active', 'owner_id', 'count_img', 'deleted', 'parent_id'], 'integer'],
-            [['date_updated', 'date_created', 'date_manual_updated', 'date_end_activity', 'date_up_search', 'is_free_to'], 'safe'],
+            [['type_id', 'category_id', 'country', 'region', 'city', 'city_id', 'view_count', 'activity_always', 'is_price_poa', 'price', 'price_to', 'num_of_rooms', 'floor', 'floor_total', 'window_to', 'living_conditions', 'services', 'active', 'rating', 'is_special_offer', 'price_type', 'sorter', 'owner_active', 'owner_id', 'count_img', 'is_deleted', 'parent_id'], 'integer'],
+            [['updated_at', 'created_at', 'manual_updated_at', 'activity_end_at', 'date_up_search', 'is_free_to'], 'safe'],
             [['square', 'land_square'], 'number'],
             [['description_near_en', 'title_en', 'description_en', 'exchange_to_en', 'note'], 'string'],
             [['berths', 'address_en'], 'string', 'max' => 255],
             [['lat', 'lng'], 'string', 'max' => 25],
             [['phone'], 'string', 'max' => 20],
-            [['autoVKPostId', 'autoFBPostId', 'autoTwitterPostId'], 'string', 'max' => 50],
+            [['vk_post_id', 'facebook_post_id', 'twitter_post_id'], 'string', 'max' => 50],
         ];
     }
 
@@ -97,16 +96,16 @@ class Listing extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'type' => Yii::t('app', 'Type'),
-            'obj_type_id' => Yii::t('app', 'Obj Type ID'),
-            'loc_country' => Yii::t('app', 'Loc Country'),
-            'loc_region' => Yii::t('app', 'Loc Region'),
-            'loc_city' => Yii::t('app', 'Loc City'),
+            'category_id' => Yii::t('app', 'Category'),
+            'country' => Yii::t('app', 'Country'),
+            'region' => Yii::t('app', 'Region'),
+            'city' => Yii::t('app', 'City'),
             'city_id' => Yii::t('app', 'City ID'),
-            'visits' => Yii::t('app', 'Visits'),
-            'date_updated' => Yii::t('app', 'Date Updated'),
-            'date_created' => Yii::t('app', 'Date Created'),
-            'date_manual_updated' => Yii::t('app', 'Date Manual Updated'),
-            'date_end_activity' => Yii::t('app', 'Date End Activity'),
+            'view_count' => Yii::t('app', 'Views'),
+            'updated_at' => Yii::t('app', 'Date Updated'),
+            'created_at' => Yii::t('app', 'Date Created'),
+            'manual_updated_at' => Yii::t('app', 'Date Manual Updated'),
+            'activity_end_at' => Yii::t('app', 'Date End Activity'),
             'activity_always' => Yii::t('app', 'Activity Always'),
             'is_price_poa' => Yii::t('app', 'Is Price Poa'),
             'price' => Yii::t('app', 'Price'),
@@ -138,11 +137,11 @@ class Listing extends \yii\db\ActiveRecord
             'exchange_to_en' => Yii::t('app', 'Exchange To En'),
             'note' => Yii::t('app', 'Note'),
             'phone' => Yii::t('app', 'Phone'),
-            'autoVKPostId' => Yii::t('app', 'Auto Vkpost ID'),
-            'autoFBPostId' => Yii::t('app', 'Auto Fbpost ID'),
-            'autoTwitterPostId' => Yii::t('app', 'Auto Twitter Post ID'),
+            'vk_post_id' => Yii::t('app', 'Auto Vkpost ID'),
+            'facebook_post_id' => Yii::t('app', 'Auto Fbpost ID'),
+            'twitter_post_id' => Yii::t('app', 'Auto Twitter Post ID'),
             'count_img' => Yii::t('app', 'Count Img'),
-            'deleted' => Yii::t('app', 'Deleted'),
+            'is_deleted' => Yii::t('app', 'Is Deleted'),
             'parent_id' => Yii::t('app', 'Parent ID'),
         ];
     }
@@ -158,14 +157,14 @@ class Listing extends \yii\db\ActiveRecord
 
     public function getImages()
     {
-        return $this->hasMany(Image::class, ['id' => 'id_object'])
-            ->orderBy('is_main DESC, sorter');
+        return $this->hasMany(ListingImage::class, ['id' => 'listing_id'])
+            ->orderBy('is_default DESC, sort_order');
     }
 
     public function getImage()
     {
-        return $this->hasOne(Image::class, ['id_object' => 'id'])
-            ->where(['is_main' => true]);
+        return $this->hasOne(ListingImage::class, ['listing_id' => 'id'])
+            ->default();
     }
 
     public function getTitle()
