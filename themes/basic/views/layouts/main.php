@@ -37,7 +37,7 @@ BasicAsset::register($this);
         'brandUrl' => Yii::$app->homeUrl,
         'containerOptions' => ['class' => 'navbar-collapse justify-content-end'],
         'options' => [
-            'class' => 'navbar-dark navbar-expand-lg fixed-top',
+            'class' => 'navbar-dark navbar-expand-lg',
         ],
     ]);
     echo Nav::widget([
@@ -72,9 +72,7 @@ BasicAsset::register($this);
     NavBar::end();
     ?>
 
-    <main class="page-content" role="main">
-        <?= $content ?>
-    </main>
+    <?= $content ?>
 
     <footer class="page-footer">
         <div class="container">

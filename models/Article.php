@@ -86,10 +86,10 @@ class Article extends \yii\db\ActiveRecord
     {
         $image = '';
         if (isset($this->image)) {
-            $image = $this->image->file_path;
+            $image = $this->image->path;
         }
 
-        return Yii::getAlias('@web') . '/uploads/articles/thumb_480x480_' . $image;
+        return Url::to('/uploads/articles/thumb_480x480_' . $image);
     }
 
     public function getSummary()

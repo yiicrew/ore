@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use yii\helpers\StringHelper;
+use yii\helpers\Inflector;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "apartment".
@@ -35,13 +37,13 @@ use yii\helpers\StringHelper;
  * @property string $berths
  * @property integer $active
  * @property string $lat
- * @property string $lng
+ * @property string $lon
  * @property integer $rating
  * @property string $date_up_search
  * @property integer $is_special_offer
  * @property string $is_free_to
  * @property integer $price_type
- * @property integer $sorter
+ * @property integer $sort_order
  * @property integer $owner_active
  * @property integer $owner_id
  * @property string $description_near_en
@@ -77,12 +79,12 @@ class Listing extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type_id', 'category_id', 'country', 'region', 'city', 'city_id', 'view_count', 'activity_always', 'is_price_poa', 'price', 'price_to', 'num_of_rooms', 'floor', 'floor_total', 'window_to', 'living_conditions', 'services', 'active', 'rating', 'is_special_offer', 'price_type', 'sorter', 'owner_active', 'owner_id', 'count_img', 'is_deleted', 'parent_id'], 'integer'],
+            [['type_id', 'category_id', 'country', 'region', 'city', 'city_id', 'view_count', 'activity_always', 'is_price_poa', 'price', 'price_to', 'num_of_rooms', 'floor', 'floor_total', 'window_to', 'living_conditions', 'services', 'active', 'rating', 'is_special_offer', 'price_type', 'sort_order', 'owner_active', 'owner_id', 'count_img', 'is_deleted', 'parent_id'], 'integer'],
             [['updated_at', 'created_at', 'manual_updated_at', 'activity_end_at', 'date_up_search', 'is_free_to'], 'safe'],
             [['square', 'land_square'], 'number'],
             [['description_near_en', 'title_en', 'description_en', 'exchange_to_en', 'note'], 'string'],
             [['berths', 'address_en'], 'string', 'max' => 255],
-            [['lat', 'lng'], 'string', 'max' => 25],
+            [['lat', 'lon'], 'string', 'max' => 25],
             [['phone'], 'string', 'max' => 20],
             [['vk_post_id', 'facebook_post_id', 'twitter_post_id'], 'string', 'max' => 50],
         ];
@@ -121,13 +123,13 @@ class Listing extends \yii\db\ActiveRecord
             'berths' => Yii::t('app', 'Berths'),
             'active' => Yii::t('app', 'Active'),
             'lat' => Yii::t('app', 'Lat'),
-            'lng' => Yii::t('app', 'Lng'),
+            'lon' => Yii::t('app', 'lon'),
             'rating' => Yii::t('app', 'Rating'),
             'date_up_search' => Yii::t('app', 'Date Up Search'),
             'is_special_offer' => Yii::t('app', 'Is Special Offer'),
             'is_free_to' => Yii::t('app', 'Is Free To'),
             'price_type' => Yii::t('app', 'Price Type'),
-            'sorter' => Yii::t('app', 'Sorter'),
+            'sort_order' => Yii::t('app', 'sort_order'),
             'owner_active' => Yii::t('app', 'Owner Active'),
             'owner_id' => Yii::t('app', 'Owner ID'),
             'description_near_en' => Yii::t('app', 'Description Near En'),
@@ -172,8 +174,16 @@ class Listing extends \yii\db\ActiveRecord
         return StringHelper::truncate($this->title_en, 20);
     }
 
-    public function getDescriptionShort()
+    public function getExcerpt()
     {
         return StringHelper::truncate($this->description_en, 30);
+    }
+
+    public function getUrl()
+    {
+        return Url::toRoute(['listing/view', 
+            'id' => $this->id,
+            'slug' => Inflector::slug($this->title_en)
+        ]);
     }
 }

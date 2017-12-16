@@ -8,6 +8,7 @@ use app\widgets\Alert;
 
 ?>
 <?php $this->beginContent('@app/views/layouts/main.php'); ?>
+<?= $this->render('@app/views/shared/_hero') ?>
 <main class="page-content" role="main">
     <div class="container">
         <?= Breadcrumbs::widget([

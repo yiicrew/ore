@@ -3,16 +3,18 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\User;
-use yii\web\Response;
-use yii\web\Controller;
-use app\models\LoginForm;
-use app\models\ContactForm;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\Response;
+use yii\web\Controller;
+use app\models\User;
+use app\models\LoginForm;
+use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+    public $layout = "column1";
+
     /**
      * @inheritdoc
      */
@@ -67,7 +69,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout = 'column1';
+        $this->layout = 'home';
 
 //         $feed = Yii::$app->simplepie->config([
 //             'set_feed_url' => 'http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml',

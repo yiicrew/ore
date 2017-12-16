@@ -22,7 +22,7 @@ body {
   min-height: 100%;
   height: auto;
   margin: 0 auto -60px;
-  padding: 50px 0 60px 0;
+  padding: 15px 0 60px 0;
 }
 
 .page-footer {
@@ -100,6 +100,8 @@ a.desc:after {
 /* Components 
 ================================== */
 
+/* Error */
+.error {}
 
 /* Button */
 

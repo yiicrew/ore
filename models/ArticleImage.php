@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "entries_image".
  *
  * @property integer $id
- * @property string $file_path
+ * @property string $path
  * @property string $created_at
  */
 class ArticleImage extends \yii\db\ActiveRecord
@@ -28,7 +28,7 @@ class ArticleImage extends \yii\db\ActiveRecord
     {
         return [
             [['created_at'], 'safe'],
-            [['file_path'], 'string', 'max' => 255],
+            [['path'], 'string', 'max' => 255],
         ];
     }
 
@@ -39,7 +39,7 @@ class ArticleImage extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'file_path' => Yii::t('app', 'File Path'),
+            'path' => Yii::t('app', 'File Path'),
             'created_at' => Yii::t('app', 'Date Created'),
         ];
     }

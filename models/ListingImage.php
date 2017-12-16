@@ -11,8 +11,8 @@ use yii\helpers\Url;
  * @property integer $id
  * @property integer $user_id
  * @property integer $listing_id
- * @property string $file_path
- * @property string $public_file_path
+ * @property string $path
+ * @property string $public_path
  * @property integer $sort_order
  * @property integer $is_default
  * @property string $created_at
@@ -38,7 +38,7 @@ class ListingImage extends \yii\db\ActiveRecord
         return [
             [['listing_id', 'user_id', 'sort_order', 'is_default'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['file_path', 'public_file_path'], 'string', 'max' => 255],
+            [['path', 'public_path'], 'string', 'max' => 255],
         ];
     }
 
@@ -51,8 +51,8 @@ class ListingImage extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'listing_id' => Yii::t('app', 'Listing Id'),
             'user_id' => Yii::t('app', 'User Id'),
-            'file_path' => Yii::t('app', 'File Path'),
-            'public_file_path' => Yii::t('app', 'Public File Path'),
+            'path' => Yii::t('app', 'File Path'),
+            'public_path' => Yii::t('app', 'Public File Path'),
             'sort_order' => Yii::t('app', 'sort_order'),
             'is_default' => Yii::t('app', 'Is Default'),
             'created_at' => Yii::t('app', 'Date Created'),
@@ -71,6 +71,6 @@ class ListingImage extends \yii\db\ActiveRecord
 
     public function __toString()
     {
-        return Url::to('/uploads/listings/' . $this->listing_id . '/modified/full_' . $this->public_file_path);
+        return Url::to('/uploads/listings/' . $this->listing_id . '/modified/full_' . $this->public_path);
     }
 }
