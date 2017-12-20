@@ -71,30 +71,32 @@ class SiteController extends Controller
     {
         $this->layout = 'home';
 
-//         $feed = Yii::$app->simplepie->config([
-//             'set_feed_url' => 'http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml',
-//         ])->parse();
+    /*
+        $feed = Yii::$app->simplepie->config([
+            'set_feed_url' => 'http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml',
+        ])->parse();
         
-// echo "<pre>";
-//         var_dump(
-//         $feed
-//         );
-//         die;
+        echo "<pre>";
+        var_dump(
+            $feed
+        );
+        die;
+    */
 
-        /*
+    /*
         $where = [
-        'a.is_special_offer' => 1,
-        'a.deleted' => 0,
-        'a.active' => Apartment::STATUS_ACTIVE
+            'a.is_special_offer' => 1,
+            'a.deleted' => 0,
+            'a.active' => Apartment::STATUS_ACTIVE
         ];
 
         // if $userId is available include userid in $where
         $apparments = (new Query)->from('apartment a')
-        ->select('a.id')
-        ->where($where)
-        ->limit(10)
-        ->all();
-         */
+            ->select('a.id')
+            ->where($where)
+            ->limit(10)
+            ->all();
+    */
         return $this->render('index');
     }
 
