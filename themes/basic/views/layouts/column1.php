@@ -3,7 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use yii\widgets\Breadcrumbs;
+use app\widgets\Breadcrumbs;
 use app\widgets\Alert;
 
 ?>

@@ -3,9 +3,9 @@
 namespace app\models;
 
 use Yii;
-use yii\helpers\StringHelper;
-use yii\helpers\Inflector;
 use yii\helpers\Url;
+use yii\helpers\Inflector;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "apartment".
@@ -13,8 +13,8 @@ use yii\helpers\Url;
  * @property integer $id
  * @property integer $type_id
  * @property integer $category_id
- * @property integer $country
- * @property integer $region
+ * @property integer $country_id
+ * @property integer $region_id
  * @property integer $city
  * @property integer $city_id
  * @property integer $view_count
@@ -79,7 +79,7 @@ class Listing extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type_id', 'category_id', 'country', 'region', 'city', 'city_id', 'view_count', 'activity_always', 'is_price_poa', 'price', 'price_to', 'num_of_rooms', 'floor', 'floor_total', 'window_to', 'living_conditions', 'services', 'active', 'rating', 'is_special_offer', 'price_type', 'sort_order', 'owner_active', 'owner_id', 'count_img', 'is_deleted', 'parent_id'], 'integer'],
+            [['type_id', 'category_id', 'country_id', 'region_id', 'city', 'city_id', 'view_count', 'activity_always', 'is_price_poa', 'price', 'price_to', 'num_of_rooms', 'floor', 'floor_total', 'window_to', 'living_conditions', 'services', 'active', 'rating', 'is_special_offer', 'price_type', 'sort_order', 'owner_active', 'owner_id', 'count_img', 'is_deleted', 'parent_id'], 'integer'],
             [['updated_at', 'created_at', 'manual_updated_at', 'activity_end_at', 'date_up_search', 'is_free_to'], 'safe'],
             [['square', 'land_square'], 'number'],
             [['description_near_en', 'title_en', 'description_en', 'exchange_to_en', 'note'], 'string'],
@@ -99,10 +99,9 @@ class Listing extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'type' => Yii::t('app', 'Type'),
             'category_id' => Yii::t('app', 'Category'),
-            'country' => Yii::t('app', 'Country'),
-            'region' => Yii::t('app', 'Region'),
-            'city' => Yii::t('app', 'City'),
-            'city_id' => Yii::t('app', 'City ID'),
+            'country_id' => Yii::t('app', 'Country'),
+            'region_id' => Yii::t('app', 'Region'),
+            'city_id' => Yii::t('app', 'City'),
             'view_count' => Yii::t('app', 'Views'),
             'updated_at' => Yii::t('app', 'Date Updated'),
             'created_at' => Yii::t('app', 'Date Created'),
@@ -169,6 +168,11 @@ class Listing extends \yii\db\ActiveRecord
             ->default();
     }
 
+    public function getCity()
+    {
+        return $this->hasOne(City::class, ['id' => 'city_id']);
+    }
+
     public function getTitle()
     {
         return StringHelper::truncate($this->title_en, 20);
@@ -181,9 +185,48 @@ class Listing extends \yii\db\ActiveRecord
 
     public function getUrl()
     {
-        return Url::toRoute(['listing/view', 
+        return Url::toRoute(['listing/view',
             'id' => $this->id,
-            'slug' => Inflector::slug($this->title_en)
+            'slug' => Inflector::slug($this->title_en),
         ]);
     }
+
+    public function isOwner()
+    {
+        return true;
+    }
+
+    public function getIsDeleted()
+    {
+        return false;
+    }
+
+    public function getEditUrl()
+    {
+        if (Yii::$app->user->can('backend_access')) {
+            return Yii::$app->urlManager->createUrl(
+                '/apartments/backend/main/update',
+                ['id' => $this->id]
+            );
+        } elseif ($this->isOwner() && !$this->isDeleted) {
+            return Url::to(['/user/listing/update', 'id' => $this->id]);
+        }
+    }
+
+    public function getMetaTitle()
+    {
+        $title = $this->title_en;
+        if (isset($this->city) && isset($this->city->name)) {
+            $title .= ', ' . Yii::t('app', 'City') . ' ' . $this->city->name;
+        }
+
+        return $title;
+    }
+
+    public function getMetaDescription()
+    {
+        return StringHelper::truncate($this->description_en, 20);
+    }
+
+
 }
