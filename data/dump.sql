@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.20, for osx10.11 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.14, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ore
 -- ------------------------------------------------------
--- Server version	5.7.20
+-- Server version	5.7.14
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,186 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `apartment_complain`
---
-
-DROP TABLE IF EXISTS `apartment_complain`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `apartment_complain` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_ip` varchar(60) NOT NULL DEFAULT '',
-  `user_ip_ip2_long` varchar(60) NOT NULL DEFAULT '',
-  `apartment_id` int(11) NOT NULL DEFAULT '0',
-  `complain_id` int(11) NOT NULL DEFAULT '0',
-  `user_id` int(11) NOT NULL DEFAULT '0',
-  `session_id` char(32) NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `email` varchar(255) NOT NULL DEFAULT '',
-  `body` text,
-  `date_created` timestamp NULL DEFAULT NULL,
-  `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `apartment_id` (`apartment_id`),
-  KEY `date_updated` (`date_updated`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `apartment_complain`
---
-
-LOCK TABLES `apartment_complain` WRITE;
-/*!40000 ALTER TABLE `apartment_complain` DISABLE KEYS */;
-/*!40000 ALTER TABLE `apartment_complain` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `apartment_complain_reason`
---
-
-DROP TABLE IF EXISTS `apartment_complain_reason`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `apartment_complain_reason` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sorter` smallint(6) NOT NULL DEFAULT '0',
-  `active` tinyint(1) NOT NULL DEFAULT '0',
-  `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `name_en` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `apartment_complain_reason`
---
-
-LOCK TABLES `apartment_complain_reason` WRITE;
-/*!40000 ALTER TABLE `apartment_complain_reason` DISABLE KEYS */;
-INSERT INTO `apartment_complain_reason` VALUES (1,1,0,'2016-09-17 05:09:05','Spam, a repeated listing or advertisement'),(2,2,0,'2016-09-17 05:09:05','Description or price is not true'),(3,3,0,'2016-09-17 05:09:05','The company that pretends to be as a private person'),(4,4,0,'2016-09-17 05:09:05','Other');
-/*!40000 ALTER TABLE `apartment_complain_reason` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `apartment_panorama`
---
-
-DROP TABLE IF EXISTS `apartment_panorama`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `apartment_panorama` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `apartment_id` int(10) unsigned NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `width` int(10) unsigned NOT NULL DEFAULT '0',
-  `height` int(10) unsigned NOT NULL DEFAULT '0',
-  `date_created` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `apartment_panorama`
---
-
-LOCK TABLES `apartment_panorama` WRITE;
-/*!40000 ALTER TABLE `apartment_panorama` DISABLE KEYS */;
-/*!40000 ALTER TABLE `apartment_panorama` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `apartment_reference`
---
-
-DROP TABLE IF EXISTS `apartment_reference`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `apartment_reference` (
-  `reference_id` int(11) NOT NULL DEFAULT '0',
-  `reference_value_id` int(11) NOT NULL DEFAULT '0',
-  `apartment_id` int(11) NOT NULL DEFAULT '0',
-  KEY `apartment_id` (`apartment_id`),
-  KEY `reference_id` (`reference_id`),
-  KEY `reference_value_id` (`reference_value_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `apartment_reference`
---
-
-LOCK TABLES `apartment_reference` WRITE;
-/*!40000 ALTER TABLE `apartment_reference` DISABLE KEYS */;
-INSERT INTO `apartment_reference` VALUES (2,12,21),(2,14,21),(1,6,21),(1,7,21),(3,24,21),(3,26,21),(3,27,21),(4,29,21),(7,36,21),(7,39,21),(2,10,28),(2,11,28),(2,12,28),(2,13,28),(2,14,28),(5,32,28),(5,34,28),(1,1,28),(1,2,28),(1,3,28),(1,4,28),(1,6,28),(1,7,28),(3,18,28),(3,19,28),(3,20,28),(3,21,28),(3,24,28),(3,25,28),(3,26,28),(3,27,28),(4,29,28),(4,30,28),(4,31,28),(7,36,28),(7,37,28),(7,38,28),(7,39,28),(2,10,27),(2,11,27),(2,12,27),(2,13,27),(2,14,27),(2,15,27),(2,16,27),(2,17,27),(5,32,27),(5,33,27),(5,34,27),(1,1,27),(1,2,27),(1,3,27),(1,4,27),(1,5,27),(1,6,27),(1,7,27),(1,35,27),(3,19,27),(3,20,27),(3,21,27),(3,22,27),(3,23,27),(3,24,27),(3,25,27),(3,26,27),(3,27,27),(4,29,27),(4,30,27),(4,31,27),(7,37,27),(7,38,27),(7,39,27),(10,43,27),(10,44,27),(10,45,27),(9,40,27),(9,41,27),(9,42,27),(2,11,25),(2,12,25),(5,34,25),(1,2,25),(1,4,25),(1,35,25),(3,25,25),(3,26,25),(3,27,25),(10,45,25),(2,10,26),(2,11,26),(2,12,26),(2,13,26),(2,14,26),(2,15,26),(2,16,26),(2,17,26),(5,32,26),(5,33,26),(5,34,26),(1,1,26),(1,2,26),(1,3,26),(1,4,26),(1,5,26),(1,6,26),(1,7,26),(1,35,26),(3,19,26),(3,20,26),(3,21,26),(3,22,26),(3,23,26),(3,24,26),(3,25,26),(3,26,26),(3,27,26),(4,28,26),(4,29,26),(4,30,26),(4,31,26),(7,36,26),(7,37,26),(7,38,26),(7,39,26),(10,43,26),(10,44,26),(10,45,26),(9,40,26),(9,41,26),(9,42,26),(2,10,18),(2,11,18),(2,12,18),(2,14,18),(2,15,18),(5,32,18),(1,1,18),(1,2,18),(1,3,18),(1,4,18),(1,6,18),(1,7,18),(3,21,18),(3,22,18),(3,24,18),(3,26,18),(3,27,18),(4,29,18),(4,30,18),(4,31,18),(7,36,18),(7,39,18),(2,11,20),(2,12,20),(2,13,20),(2,14,20),(5,32,20),(5,33,20),(5,34,20),(1,2,20),(1,3,20),(1,4,20),(1,5,20),(1,6,20),(1,7,20),(1,35,20),(3,19,20),(3,20,20),(3,24,20),(3,25,20),(3,26,20),(3,27,20),(4,29,20),(4,30,20),(7,36,20),(7,39,20),(2,10,19),(2,11,19),(2,12,19),(2,13,19),(2,14,19),(5,32,19),(5,33,19),(1,1,19),(1,2,19),(1,3,19),(1,4,19),(1,6,19),(3,19,19),(3,20,19),(3,23,19),(3,24,19),(3,25,19),(3,26,19),(3,27,19),(4,30,19),(4,31,19),(7,38,19),(7,39,19),(2,12,24),(2,13,24),(2,14,24),(2,16,24),(2,17,24),(5,33,24),(1,2,24),(1,3,24),(1,4,24),(1,6,24),(1,7,24),(3,20,24),(3,23,24),(3,24,24),(3,25,24),(3,26,24),(3,27,24),(4,29,24),(4,30,24),(4,31,24),(7,37,24),(7,38,24),(7,39,24),(2,10,29),(2,11,29),(2,12,29),(2,13,29),(5,32,29),(5,33,29),(5,34,29),(1,2,29),(1,4,29),(1,5,29),(1,35,29),(3,25,29),(3,26,29),(3,27,29),(2,10,23),(2,11,23),(2,12,23),(2,13,23),(5,32,23),(5,33,23),(1,1,23),(1,2,23),(1,3,23),(1,4,23),(1,5,23),(1,6,23),(1,7,23),(3,19,23),(3,20,23),(3,21,23),(3,23,23),(3,24,23),(3,25,23),(3,26,23),(3,27,23),(4,29,23),(7,37,23),(7,38,23),(7,39,23),(2,10,22),(2,11,22),(2,12,22),(2,13,22),(5,32,22),(5,33,22),(5,34,22),(1,2,22),(1,4,22),(1,5,22),(1,35,22),(3,25,22),(3,26,22),(3,27,22);
-/*!40000 ALTER TABLE `apartment_reference` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `apartment_reference_categories`
---
-
-DROP TABLE IF EXISTS `apartment_reference_categories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `apartment_reference_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` tinyint(1) NOT NULL DEFAULT '1',
-  `title_en` varchar(255) NOT NULL DEFAULT '',
-  `sorter` smallint(6) NOT NULL DEFAULT '0',
-  `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `style` enum('column1','column2','column3') NOT NULL DEFAULT 'column1',
-  PRIMARY KEY (`id`),
-  KEY `date_updated` (`date_updated`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `apartment_reference_categories`
---
-
-LOCK TABLES `apartment_reference_categories` WRITE;
-/*!40000 ALTER TABLE `apartment_reference_categories` DISABLE KEYS */;
-INSERT INTO `apartment_reference_categories` VALUES (1,1,'Comfort',2,'2016-09-17 05:20:23','column3'),(2,1,'Bathroom',4,'2016-09-17 05:20:23','column3'),(3,1,'Kitchen',3,'2016-09-17 05:20:23','column3'),(4,1,'Work',5,'2016-09-17 05:20:23','column3'),(5,1,'Security',1,'2016-09-17 05:20:23','column3'),(7,1,'Entertainment',6,'2016-09-17 05:20:23','column3'),(9,1,'On conditions',8,'2016-09-17 05:20:23','column1'),(10,1,'Services',7,'2016-09-17 05:20:23','column1');
-/*!40000 ALTER TABLE `apartment_reference_categories` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `apartment_reference_values`
---
-
-DROP TABLE IF EXISTS `apartment_reference_values`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `apartment_reference_values` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `category_id` int(11) NOT NULL DEFAULT '0',
-  `title_en` varchar(255) NOT NULL DEFAULT '',
-  `sorter` smallint(6) NOT NULL DEFAULT '0',
-  `for_rent` tinyint(1) NOT NULL DEFAULT '1',
-  `for_sale` tinyint(1) NOT NULL DEFAULT '1',
-  `buy` tinyint(1) NOT NULL DEFAULT '1',
-  `rent` tinyint(1) NOT NULL DEFAULT '1',
-  `exchange` tinyint(1) NOT NULL DEFAULT '1',
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `reference_category_id` (`category_id`),
-  KEY `date_updated` (`updated_at`)
-) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `apartment_reference_values`
---
-
-LOCK TABLES `apartment_reference_values` WRITE;
-/*!40000 ALTER TABLE `apartment_reference_values` DISABLE KEYS */;
-INSERT INTO `apartment_reference_values` VALUES (1,1,'dryer for linen',1,1,0,0,1,1,'2017-09-15 08:41:40'),(2,1,'plastic windows',2,1,1,1,1,1,'2016-09-17 06:27:52'),(3,1,'dense curtains for a comfortable dream',3,1,0,0,1,1,'2017-09-15 08:41:40'),(4,1,'splendid view',4,1,1,1,1,1,'2016-09-17 06:27:52'),(5,1,'quiet area',5,1,1,1,1,1,'2016-09-17 06:27:52'),(6,1,'iron',6,1,0,0,1,1,'2017-09-15 08:41:40'),(7,1,'ironing table',7,1,0,0,1,1,'2017-09-15 08:41:40'),(8,1,'slippers',8,1,0,0,1,1,'2017-09-15 08:41:40'),(9,1,'snack Pack at arrival (a water bottle, croissants, crackers etc.)',9,1,0,0,1,1,'2017-09-15 08:41:40'),(10,2,'separate bathroom',1,1,1,1,1,1,'2016-09-17 06:27:52'),(11,2,'washing machine',2,1,1,1,1,1,'2016-09-17 06:27:52'),(12,2,'bath',3,1,1,1,1,1,'2016-09-17 06:27:52'),(13,2,'water heater',4,1,1,1,1,1,'2016-09-17 06:27:52'),(14,2,'hairdryer',5,1,0,0,1,1,'2017-09-15 08:41:40'),(15,2,'soap',6,1,0,0,1,1,'2017-09-15 08:41:40'),(16,2,'shampoo',7,1,0,0,1,1,'2017-09-15 08:41:40'),(17,2,'shower gel',8,1,0,0,1,1,'2017-09-15 08:41:40'),(18,3,'everything for cooking',1,1,0,0,1,1,'2017-09-15 08:41:40'),(19,3,'water filter',2,1,0,0,1,1,'2017-09-15 08:41:40'),(20,3,'electric kettle',3,1,0,0,1,1,'2017-09-15 08:41:40'),(21,3,'everything for food intake',4,1,0,0,1,1,'2017-09-15 08:41:40'),(22,3,'tea, coffee, sugar',5,1,0,0,1,1,'2017-09-15 08:41:40'),(23,3,'3-person dining table',6,1,0,0,1,1,'2017-09-15 08:41:40'),(24,3,'microwave oven',7,1,0,0,1,1,'2017-09-15 08:41:40'),(25,3,'extract',8,1,1,1,1,1,'2016-09-17 06:31:08'),(26,3,'plate',9,1,1,1,1,1,'2016-09-17 06:31:08'),(27,3,'refrigerator',10,1,1,1,1,1,'2016-09-17 06:31:08'),(28,4,'long distance and international calls (up to $2 per day) are included in price',1,1,0,0,1,1,'2017-09-15 08:41:40'),(29,4,'phone',2,1,0,0,1,1,'2017-09-15 08:41:40'),(30,4,'unlimited high-speed Internet is included in price',3,1,0,0,1,1,'2017-09-15 08:41:40'),(31,4,'working table',4,1,0,0,1,1,'2017-09-15 08:41:40'),(32,5,'coded lock',1,1,1,1,1,1,'2016-09-17 06:31:08'),(33,5,'metal door to the vestibule',2,1,1,1,1,1,'2016-09-17 06:31:08'),(34,5,'metal front door',3,1,1,1,1,1,'2016-09-17 06:32:25'),(35,1,'intercom',10,1,1,1,1,1,'2016-09-17 06:32:25'),(36,7,'cable TV',1,1,0,0,1,1,'2017-09-15 08:41:40'),(37,7,'DVD player',2,1,0,0,1,1,'2017-09-15 08:41:40'),(38,7,'satellite TV',3,1,0,0,1,1,'2017-09-15 08:41:40'),(39,7,'TV',4,1,0,0,1,1,'2017-09-15 08:41:40'),(40,9,'Early checking in (till 2.00 p.m.) and late checking out (after 12.00 noon) are charged 50 % of daily rate.',1,1,0,0,1,1,'2017-09-15 08:41:40'),(41,9,'The minimum period of accommodation is two days.',2,1,0,0,1,1,'2017-09-15 08:41:40'),(42,9,'Accommodation for pets isn\'t allowed.',3,1,0,0,1,1,'2017-09-15 08:41:40'),(43,10,'Cleaning is included in price: Each working day, according to the timetable placed in the apartment.',1,1,0,0,1,1,'2017-09-15 08:41:40'),(44,10,'Change of linen and towels is included in price: Once in four days.',2,1,0,0,1,1,'2017-09-15 08:41:40'),(45,10,'The prices are specified in USD. You can find the current rate of a currency exchange on the site of the Central Bank of the Russian Federation.',3,1,1,1,1,1,'2016-09-17 06:33:03');
-/*!40000 ALTER TABLE `apartment_reference_values` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `apartment_times_in`
@@ -460,32 +280,6 @@ LOCK TABLES `booking_table` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `carousel`
---
-
-DROP TABLE IF EXISTS `carousel`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `carousel` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `status` tinyint(1) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `date_created` datetime NOT NULL,
-  `date_updated` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `carousel`
---
-
-LOCK TABLES `carousel` WRITE;
-/*!40000 ALTER TABLE `carousel` DISABLE KEYS */;
-/*!40000 ALTER TABLE `carousel` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `carousel_images`
 --
 
@@ -493,10 +287,10 @@ DROP TABLE IF EXISTS `carousel_images`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `carousel_images` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `active` tinyint(1) NOT NULL,
-  `carousel_id` int(11) NOT NULL,
-  `sorter` int(11) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `carousel_id` int(11) unsigned NOT NULL,
+  `status` tinyint(2) NOT NULL,
+  `sort_order` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
   `title_ru` varchar(255) NOT NULL,
   `text_ru` text NOT NULL,
@@ -519,6 +313,32 @@ CREATE TABLE `carousel_images` (
 LOCK TABLES `carousel_images` WRITE;
 /*!40000 ALTER TABLE `carousel_images` DISABLE KEYS */;
 /*!40000 ALTER TABLE `carousel_images` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `carousels`
+--
+
+DROP TABLE IF EXISTS `carousels`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `carousels` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `status` tinyint(2) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carousels`
+--
+
+LOCK TABLES `carousels` WRITE;
+/*!40000 ALTER TABLE `carousels` DISABLE KEYS */;
+/*!40000 ALTER TABLE `carousels` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -657,31 +477,98 @@ INSERT INTO `comments` VALUES (1,0,0,23,'Apartment','127.0.0.1','test','test@tes
 UNLOCK TABLES;
 
 --
--- Table structure for table `comparison_list`
+-- Table structure for table `comparisons`
 --
 
-DROP TABLE IF EXISTS `comparison_list`;
+DROP TABLE IF EXISTS `comparisons`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comparison_list` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL DEFAULT '0',
-  `apartment_id` int(11) NOT NULL DEFAULT '0',
-  `session_id` varchar(32) NOT NULL DEFAULT '0',
-  `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+CREATE TABLE `comparisons` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `listing_id` int(11) unsigned NOT NULL,
+  `session_id` varchar(32) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  KEY `apartment_id` (`apartment_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  KEY `apartment_id` (`listing_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `comparison_list`
+-- Dumping data for table `comparisons`
 --
 
-LOCK TABLES `comparison_list` WRITE;
-/*!40000 ALTER TABLE `comparison_list` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comparison_list` ENABLE KEYS */;
+LOCK TABLES `comparisons` WRITE;
+/*!40000 ALTER TABLE `comparisons` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comparisons` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `complain_reasons`
+--
+
+DROP TABLE IF EXISTS `complain_reasons`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `complain_reasons` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `sort_order` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(2) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `name_en` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `complain_reasons`
+--
+
+LOCK TABLES `complain_reasons` WRITE;
+/*!40000 ALTER TABLE `complain_reasons` DISABLE KEYS */;
+INSERT INTO `complain_reasons` VALUES (1,1,0,'2016-09-17 09:09:05','0000-00-00 00:00:00','Spam, a repeated listing or advertisement'),(2,2,0,'2016-09-17 09:09:05','0000-00-00 00:00:00','Description or price is not true'),(3,3,0,'2016-09-17 09:09:05','0000-00-00 00:00:00','The company that pretends to be as a private person'),(4,4,0,'2016-09-17 09:09:05','0000-00-00 00:00:00','Other');
+/*!40000 ALTER TABLE `complain_reasons` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `complains`
+--
+
+DROP TABLE IF EXISTS `complains`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `complains` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `complain_reason_id` int(11) unsigned NOT NULL,
+  `listing_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `session_id` char(32) NOT NULL,
+  `user_ip` varchar(60) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `body` text,
+  `status` tinyint(2) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `apartment_id` (`listing_id`),
+  KEY `date_updated` (`updated_at`),
+  KEY `complain_reason_id` (`complain_reason_id`),
+  CONSTRAINT `complains_ibfk_1` FOREIGN KEY (`listing_id`) REFERENCES `listings` (`id`),
+  CONSTRAINT `complains_ibfk_2` FOREIGN KEY (`complain_reason_id`) REFERENCES `complain_reasons` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `complains`
+--
+
+LOCK TABLES `complains` WRITE;
+/*!40000 ALTER TABLE `complains` DISABLE KEYS */;
+/*!40000 ALTER TABLE `complains` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -741,6 +628,69 @@ CREATE TABLE `documents` (
 LOCK TABLES `documents` WRITE;
 /*!40000 ALTER TABLE `documents` DISABLE KEYS */;
 /*!40000 ALTER TABLE `documents` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `feature_categories`
+--
+
+DROP TABLE IF EXISTS `feature_categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `feature_categories` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `type` tinyint(2) NOT NULL DEFAULT '1',
+  `title_en` varchar(255) NOT NULL,
+  `style` enum('column1','column2','column3') NOT NULL DEFAULT 'column1',
+  `sort_order` int(11) NOT NULL DEFAULT '0',
+  `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `date_updated` (`date_updated`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `feature_categories`
+--
+
+LOCK TABLES `feature_categories` WRITE;
+/*!40000 ALTER TABLE `feature_categories` DISABLE KEYS */;
+INSERT INTO `feature_categories` VALUES (1,1,'Comfort','column3',2,'2016-09-17 05:20:23'),(2,1,'Bathroom','column3',4,'2016-09-17 05:20:23'),(3,1,'Kitchen','column3',3,'2016-09-17 05:20:23'),(4,1,'Work','column3',5,'2016-09-17 05:20:23'),(5,1,'Security','column3',1,'2016-09-17 05:20:23'),(7,1,'Entertainment','column3',6,'2016-09-17 05:20:23'),(9,1,'On conditions','column1',8,'2016-09-17 05:20:23'),(10,1,'Services','column1',7,'2016-09-17 05:20:23');
+/*!40000 ALTER TABLE `feature_categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `feature_values`
+--
+
+DROP TABLE IF EXISTS `feature_values`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `feature_values` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL DEFAULT '0',
+  `title_en` varchar(255) NOT NULL DEFAULT '',
+  `sorter` smallint(6) NOT NULL DEFAULT '0',
+  `for_rent` tinyint(1) NOT NULL DEFAULT '1',
+  `for_sale` tinyint(1) NOT NULL DEFAULT '1',
+  `buy` tinyint(1) NOT NULL DEFAULT '1',
+  `rent` tinyint(1) NOT NULL DEFAULT '1',
+  `exchange` tinyint(1) NOT NULL DEFAULT '1',
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `reference_category_id` (`category_id`),
+  KEY `date_updated` (`updated_at`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `feature_values`
+--
+
+LOCK TABLES `feature_values` WRITE;
+/*!40000 ALTER TABLE `feature_values` DISABLE KEYS */;
+INSERT INTO `feature_values` VALUES (1,1,'dryer for linen',1,1,0,0,1,1,'2017-09-15 08:41:40'),(2,1,'plastic windows',2,1,1,1,1,1,'2016-09-17 06:27:52'),(3,1,'dense curtains for a comfortable dream',3,1,0,0,1,1,'2017-09-15 08:41:40'),(4,1,'splendid view',4,1,1,1,1,1,'2016-09-17 06:27:52'),(5,1,'quiet area',5,1,1,1,1,1,'2016-09-17 06:27:52'),(6,1,'iron',6,1,0,0,1,1,'2017-09-15 08:41:40'),(7,1,'ironing table',7,1,0,0,1,1,'2017-09-15 08:41:40'),(8,1,'slippers',8,1,0,0,1,1,'2017-09-15 08:41:40'),(9,1,'snack Pack at arrival (a water bottle, croissants, crackers etc.)',9,1,0,0,1,1,'2017-09-15 08:41:40'),(10,2,'separate bathroom',1,1,1,1,1,1,'2016-09-17 06:27:52'),(11,2,'washing machine',2,1,1,1,1,1,'2016-09-17 06:27:52'),(12,2,'bath',3,1,1,1,1,1,'2016-09-17 06:27:52'),(13,2,'water heater',4,1,1,1,1,1,'2016-09-17 06:27:52'),(14,2,'hairdryer',5,1,0,0,1,1,'2017-09-15 08:41:40'),(15,2,'soap',6,1,0,0,1,1,'2017-09-15 08:41:40'),(16,2,'shampoo',7,1,0,0,1,1,'2017-09-15 08:41:40'),(17,2,'shower gel',8,1,0,0,1,1,'2017-09-15 08:41:40'),(18,3,'everything for cooking',1,1,0,0,1,1,'2017-09-15 08:41:40'),(19,3,'water filter',2,1,0,0,1,1,'2017-09-15 08:41:40'),(20,3,'electric kettle',3,1,0,0,1,1,'2017-09-15 08:41:40'),(21,3,'everything for food intake',4,1,0,0,1,1,'2017-09-15 08:41:40'),(22,3,'tea, coffee, sugar',5,1,0,0,1,1,'2017-09-15 08:41:40'),(23,3,'3-person dining table',6,1,0,0,1,1,'2017-09-15 08:41:40'),(24,3,'microwave oven',7,1,0,0,1,1,'2017-09-15 08:41:40'),(25,3,'extract',8,1,1,1,1,1,'2016-09-17 06:31:08'),(26,3,'plate',9,1,1,1,1,1,'2016-09-17 06:31:08'),(27,3,'refrigerator',10,1,1,1,1,1,'2016-09-17 06:31:08'),(28,4,'long distance and international calls (up to $2 per day) are included in price',1,1,0,0,1,1,'2017-09-15 08:41:40'),(29,4,'phone',2,1,0,0,1,1,'2017-09-15 08:41:40'),(30,4,'unlimited high-speed Internet is included in price',3,1,0,0,1,1,'2017-09-15 08:41:40'),(31,4,'working table',4,1,0,0,1,1,'2017-09-15 08:41:40'),(32,5,'coded lock',1,1,1,1,1,1,'2016-09-17 06:31:08'),(33,5,'metal door to the vestibule',2,1,1,1,1,1,'2016-09-17 06:31:08'),(34,5,'metal front door',3,1,1,1,1,1,'2016-09-17 06:32:25'),(35,1,'intercom',10,1,1,1,1,1,'2016-09-17 06:32:25'),(36,7,'cable TV',1,1,0,0,1,1,'2017-09-15 08:41:40'),(37,7,'DVD player',2,1,0,0,1,1,'2017-09-15 08:41:40'),(38,7,'satellite TV',3,1,0,0,1,1,'2017-09-15 08:41:40'),(39,7,'TV',4,1,0,0,1,1,'2017-09-15 08:41:40'),(40,9,'Early checking in (till 2.00 p.m.) and late checking out (after 12.00 noon) are charged 50 % of daily rate.',1,1,0,0,1,1,'2017-09-15 08:41:40'),(41,9,'The minimum period of accommodation is two days.',2,1,0,0,1,1,'2017-09-15 08:41:40'),(42,9,'Accommodation for pets isn\'t allowed.',3,1,0,0,1,1,'2017-09-15 08:41:40'),(43,10,'Cleaning is included in price: Each working day, according to the timetable placed in the apartment.',1,1,0,0,1,1,'2017-09-15 08:41:40'),(44,10,'Change of linen and towels is included in price: Once in four days.',2,1,0,0,1,1,'2017-09-15 08:41:40'),(45,10,'The prices are specified in USD. You can find the current rate of a currency exchange on the site of the Central Bank of the Russian Federation.',3,1,1,1,1,1,'2016-09-17 06:33:03');
+/*!40000 ALTER TABLE `feature_values` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -857,6 +807,33 @@ INSERT INTO `lang` VALUES (2,0,11,1,'en','en-US','Английский',1,1,'201
 UNLOCK TABLES;
 
 --
+-- Table structure for table `listing_feature`
+--
+
+DROP TABLE IF EXISTS `listing_feature`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `listing_feature` (
+  `feature_id` int(11) unsigned NOT NULL,
+  `feature_value_id` int(11) unsigned NOT NULL,
+  `listing_id` int(11) unsigned NOT NULL,
+  KEY `apartment_id` (`listing_id`),
+  KEY `reference_id` (`feature_id`),
+  KEY `reference_value_id` (`feature_value_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `listing_feature`
+--
+
+LOCK TABLES `listing_feature` WRITE;
+/*!40000 ALTER TABLE `listing_feature` DISABLE KEYS */;
+INSERT INTO `listing_feature` VALUES (2,12,21),(2,14,21),(1,6,21),(1,7,21),(3,24,21),(3,26,21),(3,27,21),(4,29,21),(7,36,21),(7,39,21),(2,10,28),(2,11,28),(2,12,28),(2,13,28),(2,14,28),(5,32,28),(5,34,28),(1,1,28),(1,2,28),(1,3,28),(1,4,28),(1,6,28),(1,7,28),(3,18,28),(3,19,28),(3,20,28),(3,21,28),(3,24,28),(3,25,28),(3,26,28),(3,27,28),(4,29,28),(4,30,28),(4,31,28),(7,36,28),(7,37,28),(7,38,28),(7,39,28),(2,10,27),(2,11,27),(2,12,27),(2,13,27),(2,14,27),(2,15,27),(2,16,27),(2,17,27),(5,32,27),(5,33,27),(5,34,27),(1,1,27),(1,2,27),(1,3,27),(1,4,27),(1,5,27),(1,6,27),(1,7,27),(1,35,27),(3,19,27),(3,20,27),(3,21,27),(3,22,27),(3,23,27),(3,24,27),(3,25,27),(3,26,27),(3,27,27),(4,29,27),(4,30,27),(4,31,27),(7,37,27),(7,38,27),(7,39,27),(10,43,27),(10,44,27),(10,45,27),(9,40,27),(9,41,27),(9,42,27),(2,11,25),(2,12,25),(5,34,25),(1,2,25),(1,4,25),(1,35,25),(3,25,25),(3,26,25),(3,27,25),(10,45,25),(2,10,26),(2,11,26),(2,12,26),(2,13,26),(2,14,26),(2,15,26),(2,16,26),(2,17,26),(5,32,26),(5,33,26),(5,34,26),(1,1,26),(1,2,26),(1,3,26),(1,4,26),(1,5,26),(1,6,26),(1,7,26),(1,35,26),(3,19,26),(3,20,26),(3,21,26),(3,22,26),(3,23,26),(3,24,26),(3,25,26),(3,26,26),(3,27,26),(4,28,26),(4,29,26),(4,30,26),(4,31,26),(7,36,26),(7,37,26),(7,38,26),(7,39,26),(10,43,26),(10,44,26),(10,45,26),(9,40,26),(9,41,26),(9,42,26),(2,10,18),(2,11,18),(2,12,18),(2,14,18),(2,15,18),(5,32,18),(1,1,18),(1,2,18),(1,3,18),(1,4,18),(1,6,18),(1,7,18),(3,21,18),(3,22,18),(3,24,18),(3,26,18),(3,27,18),(4,29,18),(4,30,18),(4,31,18),(7,36,18),(7,39,18),(2,11,20),(2,12,20),(2,13,20),(2,14,20),(5,32,20),(5,33,20),(5,34,20),(1,2,20),(1,3,20),(1,4,20),(1,5,20),(1,6,20),(1,7,20),(1,35,20),(3,19,20),(3,20,20),(3,24,20),(3,25,20),(3,26,20),(3,27,20),(4,29,20),(4,30,20),(7,36,20),(7,39,20),(2,10,19),(2,11,19),(2,12,19),(2,13,19),(2,14,19),(5,32,19),(5,33,19),(1,1,19),(1,2,19),(1,3,19),(1,4,19),(1,6,19),(3,19,19),(3,20,19),(3,23,19),(3,24,19),(3,25,19),(3,26,19),(3,27,19),(4,30,19),(4,31,19),(7,38,19),(7,39,19),(2,12,24),(2,13,24),(2,14,24),(2,16,24),(2,17,24),(5,33,24),(1,2,24),(1,3,24),(1,4,24),(1,6,24),(1,7,24),(3,20,24),(3,23,24),(3,24,24),(3,25,24),(3,26,24),(3,27,24),(4,29,24),(4,30,24),(4,31,24),(7,37,24),(7,38,24),(7,39,24),(2,10,29),(2,11,29),(2,12,29),(2,13,29),(5,32,29),(5,33,29),(5,34,29),(1,2,29),(1,4,29),(1,5,29),(1,35,29),(3,25,29),(3,26,29),(3,27,29),(2,10,23),(2,11,23),(2,12,23),(2,13,23),(5,32,23),(5,33,23),(1,1,23),(1,2,23),(1,3,23),(1,4,23),(1,5,23),(1,6,23),(1,7,23),(3,19,23),(3,20,23),(3,21,23),(3,23,23),(3,24,23),(3,25,23),(3,26,23),(3,27,23),(4,29,23),(7,37,23),(7,38,23),(7,39,23),(2,10,22),(2,11,22),(2,12,22),(2,13,22),(5,32,22),(5,33,22),(5,34,22),(1,2,22),(1,4,22),(1,5,22),(1,35,22),(3,25,22),(3,26,22),(3,27,22);
+/*!40000 ALTER TABLE `listing_feature` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `listing_images`
 --
 
@@ -888,6 +865,35 @@ LOCK TABLES `listing_images` WRITE;
 /*!40000 ALTER TABLE `listing_images` DISABLE KEYS */;
 INSERT INTO `listing_images` VALUES (1,2,20,'4642183425303f90b58a426431faffc8.jpg','492cf403cf4ad5bcbaf00de080f4b258.jpg',1,1,'2013-02-14 21:35:08','2016-08-14 22:35:08'),(2,2,20,'98978650a82789fea10647facc9ccb31.jpg','15c38a272f21f58acdeb19181f7b23f3.jpg',2,0,'2013-02-14 21:35:08','2016-08-14 22:35:08'),(3,2,20,'37666ee0212634e5440b3b10bbb03405.jpg','730288a4362c804ae5c06b224a468b2e.jpg',3,0,'2013-02-14 21:35:08','2016-08-14 22:35:08'),(4,2,21,'07f5903ea83f2b6dcafaa938d78f31b2.jpg','1ddadde47c843b49864bc3b9e65c9fc1.jpg',1,1,'2013-02-14 21:35:09','2016-08-14 22:35:08'),(5,2,21,'b30ecde6703af338cf78351c31c244b6.jpg','f487cbc3c94b06192c73b98ab6adc8d0.jpg',2,0,'2013-02-14 21:35:09','2016-08-14 22:35:08'),(6,2,21,'2799799413c546f8cec31f4dace1bd4c.jpg','aeeb83cdfe8b0058481de9155dccb155.jpg',3,0,'2013-02-14 21:35:09','2016-08-14 22:35:08'),(7,2,22,'e0c4b12b29821bc21629e4c38ea9328e.jpg','b626fce90cb76a0da7016794be8ffc46.jpg',1,1,'2013-02-14 21:35:09','2016-08-14 22:35:08'),(8,2,22,'33fb6904072bda6867e983bbe6a4cca2.jpg','fb0f8f66b180aa5047d6208b1b9cf460.jpg',2,0,'2013-02-14 21:35:09','2016-08-14 22:35:08'),(9,2,22,'2669632aee4e4f25ff4939965abc6df1.jpg','095592da7fd664a685d041b9721c8641.jpg',3,0,'2013-02-14 21:35:09','2016-08-14 22:35:08'),(10,2,22,'76edb1c5af69ebb89c5451b638379194.jpg','1d1aaf1e5470b969a19dc0d3d6eb44b8.jpg',4,0,'2013-02-14 21:35:09','2016-08-14 22:35:08'),(11,1,23,'72f897efe9967830aec0423a452bac26.jpg','ebf4e49795ffdf6890238e7891a139fa.jpg',1,1,'2013-02-14 21:35:09','2016-08-14 22:35:08'),(12,1,23,'1062105f6f7775759509d6837ed6b71b.jpg','3eeb283f3ccca96b1840ab3fd2407c0c.jpg',2,0,'2013-02-14 21:35:09','2016-08-14 22:35:08'),(13,1,23,'4802bffadc1c3a300deec201d641c275.jpg','6f8e1ff0ba19f57e4d052060763cf1a4.jpg',3,0,'2013-02-14 21:35:09','2016-08-14 22:35:08'),(14,1,24,'434e6f58798e9d4a76b73f6d3f42bcdd.jpg','35771d6769806d963faa2709df768ab3.jpg',1,1,'2013-02-14 21:35:09','2016-08-14 22:35:08'),(15,1,24,'939f629f4d329396f431c3324630acda.jpg','51b1229bb01aa0f49d75d3b9728ad5dc.jpg',2,0,'2013-02-14 21:35:09','2016-08-14 22:35:08'),(16,2,25,'aa3b58ff0e2fc028e8d923c5e4913240.jpg','70afc13f2289863769e3c79fbd6af609.jpg',1,1,'2013-02-14 21:35:09','2016-08-14 22:35:08'),(17,2,25,'fbba2b5638379b56f07901cf811dec84.jpg','eea81eea19ea2e732d4f46e5db2cb692.jpg',2,0,'2013-02-14 21:35:10','2016-08-14 22:35:08'),(18,2,25,'5995731714c8418f6b543a0a19d9b542.jpg','2c48c40aa5ed23c5e226078bcc6a651c.jpg',3,0,'2013-02-14 21:35:10','2016-08-14 22:35:08'),(19,2,25,'4b32745ab9af98359d93f140df38b8d5.jpg','e0ebbf92a63ba4475a108a8430ebfd53.jpg',4,0,'2013-02-14 21:35:10','2016-08-14 22:35:08'),(20,1,26,'532a06605273c3a78764aef82cc2898d.jpg','cc48b9a67c1e05e242f556105b8fe842.jpg',1,1,'2013-02-14 21:35:10','2016-08-14 22:35:08'),(21,1,26,'56862e86309b7f453288fe2dedd65bee.jpg','925abcaf701ddf5e858de3d1029d9ea6.jpg',2,0,'2013-02-14 21:35:10','2016-08-14 22:35:08'),(22,1,26,'22a6e736f74a03564c817e0c1fb6de4f.jpg','64d96740d5027df5c3647b43af88eeed.jpg',3,0,'2013-02-14 21:35:10','2016-08-14 22:35:08'),(23,2,27,'a97f838a5870da7a2d43c75f1de90106.jpg','05381a9df5ad620559deb9cc79a04247.jpg',1,1,'2013-02-14 21:35:10','2016-08-14 22:35:08'),(24,2,27,'680c7d6b0899714428e5a1da0bc30fec.jpg','986c8a7a3573aa17b428f1a6ab1a9731.jpg',2,0,'2013-02-14 21:35:10','2016-08-14 22:35:08'),(25,2,27,'f95ee897b6b445cad179115eb087286d.jpg','a9ae1d8f4c72826350a73426e68b07aa.jpg',3,0,'2013-02-14 21:35:10','2016-08-14 22:35:08'),(26,2,27,'7bfbb4d132ff8aa79d8bf01100dfcb0b.jpg','37a66e8ef865567d3a60b31b9b761eee.jpg',4,0,'2013-02-14 21:35:10','2016-08-14 22:35:08'),(27,2,27,'902d83f68e6e9ec372df826018575f60.jpg','30e3c95ae319f9823f35ae838475e669.jpg',5,0,'2013-02-14 21:35:10','2016-08-14 22:35:08'),(28,2,27,'97671ea692dd5e2c7dbd0390bb0c14a9.jpg','d14491c46e0e14f2e2b20309982a9d47.jpg',6,0,'2013-02-14 21:35:10','2016-08-14 22:35:08'),(29,2,27,'ab7d6d8cd9b9cc88c6c2f886ecfb0fe1.jpg','c8bc7b3f2970dd195e338602f0874ebf.jpg',7,0,'2013-02-14 21:35:11','2016-08-14 22:35:08'),(30,2,28,'a82782685e0124929fc283d46f6401d2.jpg','5372cfe2f6db3f4c7de4fa2f54030223.jpg',1,1,'2013-02-14 21:35:11','2016-08-14 22:35:08'),(31,2,28,'6f4efbcbc0092841792a0832a9f837f7.jpg','e3e068e1ef368a8c60666ac7708a5472.jpg',2,0,'2013-02-14 21:35:11','2016-08-14 22:35:08'),(32,2,28,'a904431e0b549eb6ff5674e11fc3bb51.jpg','fca9b505abf952af7f2a052da7c27d84.jpg',3,0,'2013-02-14 21:35:11','2016-08-14 22:35:08'),(33,2,28,'ff0465c930b907a1902b84a59fad9908.jpg','dcf2bf49b9466dc400a12b4d3855a3ea.jpg',4,0,'2013-02-14 21:35:11','2016-08-14 22:35:08'),(34,2,28,'e14408748c45e0a3b99e86560994259b.jpg','a18e663a61f5d6930bb851b60c62e51d.jpg',5,0,'2013-02-14 21:35:11','2016-08-14 22:35:08'),(35,2,29,'53629d7d842247d6809ae4656dcd485e.jpg','722e4e0d81b315fb1c63b55aab347e2e.jpg',1,1,'2013-02-14 21:35:11','2016-08-14 22:35:08'),(36,2,29,'dd2ac23e94ec6135361688bb07717d53.jpg','08e1e3ce179f44fbfcecbf0d8837ba37.jpg',2,0,'2013-02-14 21:35:11','2016-08-14 22:35:08'),(37,2,29,'169ff7438eb11fc8d550be79883c6ea8.jpg','ec4c29900bb7bc394359dab585d883fc.jpg',3,0,'2013-02-14 21:35:11','2016-08-14 22:35:08'),(38,2,29,'d97fe2a7fcc6f6055c0238f054691856.jpg','7ce287f416affc4bbc2d768247079b9c.jpg',4,0,'2013-02-14 21:35:11','2016-08-14 22:35:08'),(39,2,19,'109a589ef2fbedcf57ec6b1bb980c27f.jpg','05df26fd26854d78d365495dca2fd288.jpg',1,1,'2013-02-14 21:35:11','2016-08-14 22:35:08'),(40,2,19,'0aaabd861398394fca7f6a2d88a441da.jpg','719584d4b4a236a3d07b28b7b0b65483.jpg',2,0,'2013-02-14 21:35:11','2016-08-14 22:35:08'),(41,2,19,'8f6f149af17438055fd873647ddb4b52.jpg','abb08d7926551bdcacef6e112d7c68e7.jpg',3,0,'2013-02-14 21:35:12','2016-08-14 22:35:08'),(42,2,18,'b00b91cbee4893b9efda6a83db24ed82.jpg','c5d10612afa120b285ccfb817e0a2303.jpg',1,1,'2013-02-14 21:35:12','2016-08-14 22:35:08'),(43,2,18,'7239026d4d0355a577047c699f4988a8.jpg','2eec995ba4a4a51736f9c8b70c4bb206.jpg',2,0,'2013-02-14 21:35:12','2016-08-14 22:35:08'),(44,2,18,'808ee1b66405fd7e2d376c0cfc4768d2.jpg','32edbdf4361baa92fbe8f9c6ca97f4ef.jpg',3,0,'2013-02-14 21:35:12','2016-08-14 22:35:08'),(45,2,18,'b5b4e28e37325ef9b4b20029aed4967a.jpg','3e903137e68b8c6a68c24f204febb899.jpg',4,0,'2013-02-14 21:35:12','2016-08-14 22:35:08');
 /*!40000 ALTER TABLE `listing_images` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `listing_panoramas`
+--
+
+DROP TABLE IF EXISTS `listing_panoramas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `listing_panoramas` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `listing_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `width` int(10) unsigned NOT NULL DEFAULT '0',
+  `height` int(10) unsigned NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `listing_id` (`listing_id`),
+  CONSTRAINT `listing_panoramas_ibfk_1` FOREIGN KEY (`listing_id`) REFERENCES `listings` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `listing_panoramas`
+--
+
+LOCK TABLES `listing_panoramas` WRITE;
+/*!40000 ALTER TABLE `listing_panoramas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `listing_panoramas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1133,6 +1139,35 @@ INSERT INTO `notifications` VALUES (1,3,'onNewBooking',1,'New booking','New book
 UNLOCK TABLES;
 
 --
+-- Table structure for table `oauth`
+--
+
+DROP TABLE IF EXISTS `oauth`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `oauth` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` enum('bool','text') NOT NULL DEFAULT 'text',
+  `section` varchar(100) NOT NULL DEFAULT '',
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `value` varchar(255) NOT NULL DEFAULT '',
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `date_updated` (`updated_at`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth`
+--
+
+LOCK TABLES `oauth` WRITE;
+/*!40000 ALTER TABLE `oauth` DISABLE KEYS */;
+INSERT INTO `oauth` VALUES (1,'bool','google_oauth','useGoogleOauth','0','2012-06-30 16:31:28'),(2,'text','google_oauth','googleOauthClientId','','2012-06-30 16:31:28'),(3,'text','google_oauth','googleOauthClientSecret','','2012-06-30 16:31:28'),(4,'bool','twitter','useTwitter','0','2012-06-30 16:31:28'),(5,'text','twitter','twitterKey','','2012-06-30 16:31:28'),(6,'text','twitter','twitterSecret','','2012-06-30 16:31:28'),(7,'bool','facebook','useFacebook','0','2012-06-30 16:31:28'),(8,'text','facebook','facebookClientId','','2012-06-30 16:31:28'),(9,'text','facebook','facebookClientSecret','','2012-06-30 16:31:28'),(10,'bool','vkontakte','useVkontakte','0','2012-06-30 16:31:28'),(11,'text','vkontakte','vkontakteClientId','','2012-06-30 16:31:28'),(12,'text','vkontakte','vkontakteClientSecret','','2012-06-30 16:31:28'),(13,'bool','mailru','useMailruOAuth','0','2012-06-30 16:31:28'),(14,'text','mailru','mailruClientId','','2012-06-30 16:31:28'),(15,'text','mailru','mailruClientSecret','','2012-06-30 16:31:28');
+/*!40000 ALTER TABLE `oauth` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pages`
 --
 
@@ -1173,14 +1208,14 @@ DROP TABLE IF EXISTS `payments_atol`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `payments_atol` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_payment` int(10) unsigned NOT NULL,
-  `status` tinyint(3) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `payment_id` int(11) unsigned NOT NULL,
+  `status` tinyint(2) NOT NULL,
   `uuid` varchar(128) NOT NULL,
-  `date_created` datetime NOT NULL,
-  `date_updated` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_payment` (`id_payment`),
+  KEY `id_payment` (`payment_id`),
   KEY `status` (`status`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1203,6 +1238,7 @@ DROP TABLE IF EXISTS `reviews`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reviews` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
   `user_ip` varchar(60) NOT NULL,
   `user_email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `user_name` varchar(255) NOT NULL,
@@ -1211,7 +1247,8 @@ CREATE TABLE `reviews` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `created_at` (`created_at`)
+  KEY `created_at` (`created_at`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1221,7 +1258,7 @@ CREATE TABLE `reviews` (
 
 LOCK TABLES `reviews` WRITE;
 /*!40000 ALTER TABLE `reviews` DISABLE KEYS */;
-INSERT INTO `reviews` VALUES (1,'','','Demo','You can always download the latest version of the script from this website - http://open-real-estate.info/en/download-open-real-estate',1,'2015-03-21 11:18:42','2015-03-21 07:21:34'),(2,'','','Демо','Скачать последнюю версию скрипта Вы всегда можете с сайта - http://open-real-estate.info/ru/download-open-real-estate',1,'2015-03-21 11:40:48','2015-03-21 07:33:33');
+INSERT INTO `reviews` VALUES (1,0,'','','Demo','You can always download the latest version of the script from this website - http://open-real-estate.info/en/download-open-real-estate',1,'2015-03-21 11:18:42','2015-03-21 07:21:34'),(2,0,'','','Демо','Скачать последнюю версию скрипта Вы всегда можете с сайта - http://open-real-estate.info/ru/download-open-real-estate',1,'2015-03-21 11:40:48','2015-03-21 07:33:33');
 /*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1304,7 +1341,7 @@ CREATE TABLE `service` (
   `is_offline` tinyint(1) NOT NULL DEFAULT '0',
   `allow_ip` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1318,35 +1355,6 @@ INSERT INTO `service` VALUES (1,'<p>Closed for maintenance</p>',0,'');
 UNLOCK TABLES;
 
 --
--- Table structure for table `socialauth`
---
-
-DROP TABLE IF EXISTS `socialauth`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `socialauth` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` enum('bool','text') NOT NULL DEFAULT 'text',
-  `section` varchar(100) NOT NULL DEFAULT '',
-  `name` varchar(50) NOT NULL DEFAULT '',
-  `value` varchar(255) NOT NULL DEFAULT '',
-  `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `date_updated` (`date_updated`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `socialauth`
---
-
-LOCK TABLES `socialauth` WRITE;
-/*!40000 ALTER TABLE `socialauth` DISABLE KEYS */;
-INSERT INTO `socialauth` VALUES (1,'bool','google_oauth','useGoogleOauth','0','2012-06-30 12:31:28'),(2,'text','google_oauth','googleOauthClientId','','2012-06-30 12:31:28'),(3,'text','google_oauth','googleOauthClientSecret','','2012-06-30 12:31:28'),(4,'bool','twitter','useTwitter','0','2012-06-30 12:31:28'),(5,'text','twitter','twitterKey','','2012-06-30 12:31:28'),(6,'text','twitter','twitterSecret','','2012-06-30 12:31:28'),(7,'bool','facebook','useFacebook','0','2012-06-30 12:31:28'),(8,'text','facebook','facebookClientId','','2012-06-30 12:31:28'),(9,'text','facebook','facebookClientSecret','','2012-06-30 12:31:28'),(10,'bool','vkontakte','useVkontakte','0','2012-06-30 12:31:28'),(11,'text','vkontakte','vkontakteClientId','','2012-06-30 12:31:28'),(12,'text','vkontakte','vkontakteClientSecret','','2012-06-30 12:31:28'),(13,'bool','mailru','useMailruOAuth','0','2012-06-30 12:31:28'),(14,'text','mailru','mailruClientId','','2012-06-30 12:31:28'),(15,'text','mailru','mailruClientSecret','','2012-06-30 12:31:28');
-/*!40000 ALTER TABLE `socialauth` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `templates`
 --
 
@@ -1356,16 +1364,17 @@ DROP TABLE IF EXISTS `templates`;
 CREATE TABLE `templates` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
-  `status` tinyint(2) NOT NULL,
+  `status` tinyint(2) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL,
   `body_ru` text NOT NULL,
   `body_en` text NOT NULL,
   `body_de` text NOT NULL,
   `body_es` text NOT NULL,
   `body_ar` text NOT NULL,
-  `date_created` datetime NOT NULL,
-  `date_updated` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1505,7 +1514,7 @@ CREATE TABLE `users_sessions` (
 
 LOCK TABLES `users_sessions` WRITE;
 /*!40000 ALTER TABLE `users_sessions` DISABLE KEYS */;
-INSERT INTO `users_sessions` VALUES (1,'10237abfq884ai1jqfaas9lv3c',1511205966,'d547e09d9d1250f58d95bfbf8186f6ccmenu_active|s:0:\"\";d547e09d9d1250f58d95bfbf8186f6cc__returnUrl|s:33:\"/entries/backend/main/update?id=2\";d547e09d9d1250f58d95bfbf8186f6cc__id|s:1:\"1\";d547e09d9d1250f58d95bfbf8186f6cc__name|s:6:\"alrazi\";d547e09d9d1250f58d95bfbf8186f6ccemail|s:19:\"al.razi@outlook.com\";d547e09d9d1250f58d95bfbf8186f6ccusername|s:6:\"alrazi\";d547e09d9d1250f58d95bfbf8186f6ccphone|s:15:\"+7 000 111 1111\";d547e09d9d1250f58d95bfbf8186f6ccisAdmin|i:1;d547e09d9d1250f58d95bfbf8186f6cc__states|a:4:{s:5:\"email\";b:1;s:8:\"username\";b:1;s:5:\"phone\";b:1;s:7:\"isAdmin\";b:1;}d547e09d9d1250f58d95bfbf8186f6ccattempts-login|i:0;'),(1,'50gkjn8ff37j774fd6kp8b9953',1511035086,'d547e09d9d1250f58d95bfbf8186f6ccmenu_active|s:0:\"\";d547e09d9d1250f58d95bfbf8186f6cc__returnUrl|s:33:\"/entries/backend/main/update?id=3\";d547e09d9d1250f58d95bfbf8186f6cc__id|s:1:\"1\";d547e09d9d1250f58d95bfbf8186f6cc__name|s:6:\"alrazi\";d547e09d9d1250f58d95bfbf8186f6ccemail|s:19:\"al.razi@outlook.com\";d547e09d9d1250f58d95bfbf8186f6ccusername|s:6:\"alrazi\";d547e09d9d1250f58d95bfbf8186f6ccphone|s:15:\"+7 000 111 1111\";d547e09d9d1250f58d95bfbf8186f6ccisAdmin|i:1;d547e09d9d1250f58d95bfbf8186f6cc__states|a:4:{s:5:\"email\";b:1;s:8:\"username\";b:1;s:5:\"phone\";b:1;s:7:\"isAdmin\";b:1;}d547e09d9d1250f58d95bfbf8186f6ccattempts-login|i:0;d547e09d9d1250f58d95bfbf8186f6ccApartmentERememberFiltersBehaviordefaultsSet|i:1;');
+INSERT INTO `users_sessions` VALUES (1,'10237abfq884ai1jqfaas9lv3c',1511205966,'d547e09d9d1250f58d95bfbf8186f6ccmenu_active|s:0:\"\";d547e09d9d1250f58d95bfbf8186f6cc__returnUrl|s:33:\"/entries/backend/main/update?id=2\";d547e09d9d1250f58d95bfbf8186f6cc__id|s:1:\"1\";d547e09d9d1250f58d95bfbf8186f6cc__name|s:6:\"alrazi\";d547e09d9d1250f58d95bfbf8186f6ccemail|s:19:\"al.razi@outlook.com\";d547e09d9d1250f58d95bfbf8186f6ccusername|s:6:\"alrazi\";d547e09d9d1250f58d95bfbf8186f6ccphone|s:15:\"+7 000 111 1111\";d547e09d9d1250f58d95bfbf8186f6ccisAdmin|i:1;d547e09d9d1250f58d95bfbf8186f6cc__states|a:4:{s:5:\"email\";b:1;s:8:\"username\";b:1;s:5:\"phone\";b:1;s:7:\"isAdmin\";b:1;}d547e09d9d1250f58d95bfbf8186f6ccattempts-login|i:0;'),(1,'50gkjn8ff37j774fd6kp8b9953',1511035086,'d547e09d9d1250f58d95bfbf8186f6ccmenu_active|s:0:\"\";d547e09d9d1250f58d95bfbf8186f6cc__returnUrl|s:33:\"/entries/backend/main/update?id=3\";d547e09d9d1250f58d95bfbf8186f6cc__id|s:1:\"1\";d547e09d9d1250f58d95bfbf8186f6cc__name|s:6:\"alrazi\";d547e09d9d1250f58d95bfbf8186f6ccemail|s:19:\"al.razi@outlook.com\";d547e09d9d1250f58d95bfbf8186f6ccusername|s:6:\"alrazi\";d547e09d9d1250f58d95bfbf8186f6ccphone|s:15:\"+7 000 111 1111\";d547e09d9d1250f58d95bfbf8186f6ccisAdmin|i:1;d547e09d9d1250f58d95bfbf8186f6cc__states|a:4:{s:5:\"email\";b:1;s:8:\"username\";b:1;s:5:\"phone\";b:1;s:7:\"isAdmin\";b:1;}d547e09d9d1250f58d95bfbf8186f6ccattempts-login|i:0;d547e09d9d1250f58d95bfbf8186f6ccApartmentERememberFiltersBehaviordefaultsSet|i:1;'),(0,'msrnkj2kc5ohvdi3t97gtkbpmi',1514723323,'50b81bebfc272dfdf8a69d0ffb0be236menu_active|s:0:\"\";');
 /*!40000 ALTER TABLE `users_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1543,8 +1552,8 @@ DROP TABLE IF EXISTS `videos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `videos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `listing_id` int(11) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `listing_id` int(11) unsigned NOT NULL,
   `file_path` varchar(255) NOT NULL,
   `embed_code` text,
   `created_at` datetime NOT NULL,
@@ -1573,4 +1582,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-31 10:44:11
+-- Dump completed on 2017-12-31 22:55:58
