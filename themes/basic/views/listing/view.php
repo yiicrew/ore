@@ -4,55 +4,65 @@ use yii\helpers\StringHelper;
 use yii\helpers\Url;
 use yii\helpers\Html;
 
+$searchUrl = Yii::$app->session->get('searchUrl');
+$isSearchPage = stripos(Yii::$app->request->referrer, Yii::$app->urlManager->getBaseUrl(true));
+
 $this->title = $listing->metaTitle;
 $this->params['description'] = $listing->metaDescription;
-
-$searchUrl = Yii::$app->session->get('searchUrl');
 $this->params['breadcrumbs'] = [
 	[
 		'label' => Yii::t('app', 'Apartment search'),
 		'url' => $searchUrl ?? ['/quicksearch/main/mainsearch']
 	],
-	StringHelper::truncate($listing->title, 10),
+    $listing->titleShort
 ];
 ?>
-<div class="listing">
-    <?php
-    if ($searchUrl) {
-      echo Html::a(
-         Html::img(Url::to('/images/design/back2search.png'), ["alt" => Yii::t('app', 'Go back to search results')]),
-         $searchUrl
-     );
-  } elseif (stripos(Yii::$app->request->referrer, Yii::$app->urlManager->getBaseUrl(true)) !== false) {
-        echo Html::a(
-            Html::img(
-                Url::to('/images/design/back2search.png'), 
-                ['alt' => Yii::t('app', 'Go back to search results')]
-            ),
-            '#', 
-            ['onclick' => 'window.history.back(); return false;']
-        );
-    }
+<section class="listing">
+    <header class="listing-header">
+        <div class="listing-toolbar list">
+            <?php if ($searchUrl || $isSearchPage): ?>
+            <a href="<?= $searchUrl ?? '#' ?>" <?= $isSearchPage ? 'onclick="window.history.back(); return false;"' : '' ?>">
+                <img src="<?= Url::to('/images/design/back2search.png') ?>" alt="<?= Yii::t('app', 'Go back to search results') ?>">
+            </a>
+            <?php endif ?>
 
+            <a href="<?= $listing->printUrl ?>" target="_blank">
+                <img src="<?= Url::to('/images/design/print.png') ?>" alt="<?= Yii::t('app', 'Print version') ?>">
+            </a>
 
-    echo Html::a(
-        Html::img(Url::to('/images/design/print.png'), ["alt" => Yii::t('app', 'Print version')]),
-        $listing->getUrl().'?printable=1', array('target' => '_blank')
-    );
+            <?php if ($listing->editUrl): ?>
+            <a href="<?= $listing->editUrl ?>">
+                <img src="<?= Url::to('/images/design/edit.png') ?>" alt="<?= Yii::t('app', 'Update apartment') ?>">
+            </a>
+            <?php endif ?>
+        </div>
 
+        <h1 class="listing-title"><?= $listing->title ?></h1>
+        <?php if ($listing->rating): ?>
+        <div class="listing-rating">
+            <?php
+            $this->widget('CStarRating',
+                array(
+                    'name'=>'ratingview'.$model->id,
+                    'id'=>'ratingview'.$model->id,
+                    'value'=>intval($model->rating),
+                    'readOnly'=>true,
+                    'minRating' => Comment::MIN_RATING,
+                    'maxRating' => Comment::MAX_RATING,
+                ));
+            ?>
+        </div>
+        <?php endif ?>
 
-  $editUrl = $listing->getEditUrl();
+        <div class="listing-stats">
+        <?php if (isset($stats) && is_array($stats)) : ?>
+            <?= Yii::t('app', 'Views') ?>: <?= Yii::t('app', 'views_all') . ' ' . $stats['all'] ?>, <?= Yii::t('app', 'views_today') . ' ' . $stats['today'] . '.&nbsp;'; ?>
+            <?= '&nbsp;'. Yii::t('app', 'Date created') . ': ' . $listing->created_at; ?>
+        <?php endif; ?>
+        </div>
+    </header>
 
-  if ($editUrl) {
-      echo Html::a(
-         Html::img(Url::to('/images/design/edit.png'), ["alt" => Yii::t('app', 'Update apartment')]),
-         $editUrl
-     );
-  }
-  ?>
-  <h1 class="listing-title"><?= $listing->title_en ?></h1>
-
-  <?= $listing->id ?>
-</div>
+    <?= $listing->description_en ?>
+</section>
 
 
