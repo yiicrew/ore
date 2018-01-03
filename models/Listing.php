@@ -158,13 +158,13 @@ class Listing extends \yii\db\ActiveRecord
 
     public function getImages()
     {
-        return $this->hasMany(ListingImage::class, ['id' => 'listing_id'])
+        return $this->hasMany(Image::class, ['id' => 'listing_id'])
             ->orderBy('is_default DESC, sort_order');
     }
 
     public function getImage()
     {
-        return $this->hasOne(ListingImage::class, ['listing_id' => 'id'])
+        return $this->hasOne(Image::class, ['listing_id' => 'id'])
             ->default();
     }
 

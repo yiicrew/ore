@@ -7,7 +7,7 @@ namespace app\models;
  *
  * @see Image
  */
-class ListingImageQuery extends \yii\db\ActiveQuery
+class ImageQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,12 +16,12 @@ class ListingImageQuery extends \yii\db\ActiveQuery
 
     public function default()
     {
-        return $this->andWhere(['is_default' => ListingImage::DEFAULT]);
+        return $this->andWhere(['is_default' => Image::DEFAULT]);
     }
 
     /**
      * @inheritdoc
-     * @return ListingImage[]|array
+     * @return Image[]|array
      */
     public function all($db = null)
     {
@@ -30,7 +30,7 @@ class ListingImageQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return ListingImage|array|null
+     * @return Image|array|null
      */
     public function one($db = null)
     {

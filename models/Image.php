@@ -18,7 +18,7 @@ use yii\helpers\Url;
  * @property string $created_at
  * @property string $updated_at
  */
-class ListingImage extends \yii\db\ActiveRecord
+class Image extends \yii\db\ActiveRecord
 {
     const DEFAULT = 1;
 
@@ -27,7 +27,7 @@ class ListingImage extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'listing_images';
+        return 'images';
     }
 
     /**
@@ -66,7 +66,7 @@ class ListingImage extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new ListingImageQuery(get_called_class());
+        return new ImageQuery(get_called_class());
     }
 
     public function __toString()
