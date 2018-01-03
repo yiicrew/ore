@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -8,14 +7,13 @@ use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
 /**
- * This is the model class for table "apartment".
+ * This is the model class for table "listings".
  *
  * @property integer $id
  * @property integer $type_id
  * @property integer $category_id
  * @property integer $country_id
  * @property integer $region_id
- * @property integer $city
  * @property integer $city_id
  * @property integer $view_count
  * @property string $updated_at
@@ -57,7 +55,7 @@ use yii\helpers\StringHelper;
  * @property string $facebook_post_id
  * @property string $twitter_post_id
  * @property integer $count_img
- * @property integer $is_deleted
+ * @property integer $deleted_at
  * @property integer $parent_id
  */
 class Listing extends \yii\db\ActiveRecord
@@ -79,7 +77,7 @@ class Listing extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type_id', 'category_id', 'country_id', 'region_id', 'city', 'city_id', 'view_count', 'activity_always', 'is_price_poa', 'price', 'price_to', 'num_of_rooms', 'floor', 'floor_total', 'window_to', 'living_conditions', 'services', 'active', 'rating', 'is_special_offer', 'price_type', 'sort_order', 'owner_active', 'owner_id', 'count_img', 'is_deleted', 'parent_id'], 'integer'],
+            [['type_id', 'category_id', 'country_id', 'region_id', 'city', 'city_id', 'view_count', 'activity_always', 'is_price_poa', 'price', 'price_to', 'num_of_rooms', 'floor', 'floor_total', 'window_to', 'living_conditions', 'services', 'active', 'rating', 'is_special_offer', 'price_type', 'sort_order', 'owner_active', 'owner_id', 'count_img', 'deleted_at', 'parent_id'], 'integer'],
             [['updated_at', 'created_at', 'manual_updated_at', 'activity_end_at', 'date_up_search', 'is_free_to'], 'safe'],
             [['square', 'land_square'], 'number'],
             [['description_near_en', 'title_en', 'description_en', 'exchange_to_en', 'note'], 'string'],
@@ -97,53 +95,53 @@ class Listing extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'type' => Yii::t('app', 'Type'),
+            'parent_id' => Yii::t('app', 'Parent ID'),
+            'type_id' => Yii::t('app', 'Type'),
             'category_id' => Yii::t('app', 'Category'),
             'country_id' => Yii::t('app', 'Country'),
             'region_id' => Yii::t('app', 'Region'),
             'city_id' => Yii::t('app', 'City'),
             'view_count' => Yii::t('app', 'Views'),
-            'updated_at' => Yii::t('app', 'Date Updated'),
-            'created_at' => Yii::t('app', 'Date Created'),
             'manual_updated_at' => Yii::t('app', 'Date Manual Updated'),
-            'activity_end_at' => Yii::t('app', 'Date End Activity'),
+            'activity_ended_at' => Yii::t('app', 'Date End Activity'),
             'activity_always' => Yii::t('app', 'Activity Always'),
-            'is_price_poa' => Yii::t('app', 'Is Price Poa'),
+            'is_price_poa' => Yii::t('app', 'Price POA'),
             'price' => Yii::t('app', 'Price'),
             'price_to' => Yii::t('app', 'Price To'),
-            'num_of_rooms' => Yii::t('app', 'Num Of Rooms'),
             'floor' => Yii::t('app', 'Floor'),
-            'floor_total' => Yii::t('app', 'Floor Total'),
+            'floor_count' => Yii::t('app', 'Number of Floors'),
+            'room_count' => Yii::t('app', 'Number of Rooms'),
+            'image_count' => Yii::t('app', 'Number of Images'),
             'square' => Yii::t('app', 'Square'),
             'land_square' => Yii::t('app', 'Land Square'),
             'window_to' => Yii::t('app', 'Window To'),
             'living_conditions' => Yii::t('app', 'Living Conditions'),
             'services' => Yii::t('app', 'Services'),
             'berths' => Yii::t('app', 'Berths'),
-            'active' => Yii::t('app', 'Active'),
+            'status' => Yii::t('app', 'Status'),
             'lat' => Yii::t('app', 'Lat'),
-            'lon' => Yii::t('app', 'lon'),
+            'lon' => Yii::t('app', 'Lon'),
             'rating' => Yii::t('app', 'Rating'),
-            'date_up_search' => Yii::t('app', 'Date Up Search'),
+            'searched_at' => Yii::t('app', 'Date Up Search'),
             'is_special_offer' => Yii::t('app', 'Is Special Offer'),
             'is_free_to' => Yii::t('app', 'Is Free To'),
             'price_type' => Yii::t('app', 'Price Type'),
-            'sort_order' => Yii::t('app', 'sort_order'),
+            'sort_order' => Yii::t('app', 'Sort Order'),
             'owner_active' => Yii::t('app', 'Owner Active'),
             'owner_id' => Yii::t('app', 'Owner ID'),
-            'description_near_en' => Yii::t('app', 'Description Near En'),
-            'address_en' => Yii::t('app', 'Address En'),
-            'title_en' => Yii::t('app', 'Title En'),
-            'description_en' => Yii::t('app', 'Description En'),
-            'exchange_to_en' => Yii::t('app', 'Exchange To En'),
-            'note' => Yii::t('app', 'Note'),
+            'notes' => Yii::t('app', 'Notes'),
             'phone' => Yii::t('app', 'Phone'),
-            'vk_post_id' => Yii::t('app', 'Auto Vkpost ID'),
-            'facebook_post_id' => Yii::t('app', 'Auto Fbpost ID'),
-            'twitter_post_id' => Yii::t('app', 'Auto Twitter Post ID'),
-            'count_img' => Yii::t('app', 'Count Img'),
-            'is_deleted' => Yii::t('app', 'Is Deleted'),
-            'parent_id' => Yii::t('app', 'Parent ID'),
+            'vk_post_id' => Yii::t('app', 'VK Post ID'),
+            'facebook_post_id' => Yii::t('app', 'Facebook Post ID'),
+            'twitter_post_id' => Yii::t('app', 'Twitter Post ID'),
+            'deleted_at' => Yii::t('app', 'Deleted'),
+            'updated_at' => Yii::t('app', 'Date Updated'),
+            'created_at' => Yii::t('app', 'Date Created'),
+            'title_en' => Yii::t('app', 'Title'),
+            'near_by_en' => Yii::t('app', 'Near By'),
+            'description_en' => Yii::t('app', 'Description'),
+            'address_en' => Yii::t('app', 'Address'),
+            'exchange_to_en' => Yii::t('app', 'Exchange'),
         ];
     }
 
@@ -159,13 +157,13 @@ class Listing extends \yii\db\ActiveRecord
     public function getImages()
     {
         return $this->hasMany(Image::class, ['id' => 'listing_id'])
-            ->orderBy('is_default DESC, sort_order');
+                ->orderBy('is_default DESC, sort_order');
     }
 
     public function getImage()
     {
         return $this->hasOne(Image::class, ['listing_id' => 'id'])
-            ->default();
+                ->default();
     }
 
     public function getCity()
@@ -203,30 +201,27 @@ class Listing extends \yii\db\ActiveRecord
             'listing/view',
             'id' => $this->id,
             'slug' => Inflector::slug($this->title_en),
-            'print' => true
+            'print' => true,
         ]);
     }
 
-    public function isOwner()
+    public function getEditUrl()
+    {
+        if (Yii::$app->user->can('admin_access')) {
+            return Url::to(['/admin/listing/update', 'id' => $this->id]);
+        } elseif ($this->isOwner && !$this->isDeleted) {
+            return Url::to(['/account/listing/update', 'id' => $this->id]);
+        }
+    }
+
+    public function getIsOwner()
     {
         return true;
     }
 
     public function getIsDeleted()
     {
-        return false;
-    }
-
-    public function getEditUrl()
-    {
-        if (Yii::$app->user->can('backend_access')) {
-            return Yii::$app->urlManager->createUrl(
-                '/apartments/backend/main/update',
-                ['id' => $this->id]
-            );
-        } elseif ($this->isOwner() && !$this->isDeleted) {
-            return Url::to(['/user/listing/update', 'id' => $this->id]);
-        }
+        return isset($this->deleted_at);
     }
 
     public function getMetaTitle()
@@ -243,6 +238,4 @@ class Listing extends \yii\db\ActiveRecord
     {
         return StringHelper::truncate($this->description_en, 20);
     }
-
-
 }

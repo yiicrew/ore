@@ -38,26 +38,25 @@ $this->params['breadcrumbs'] = [
         </div>
 
         <h1 class="listing-title"><?= $listing->title ?></h1>
-        <?php if ($listing->rating): ?>
+        <!-- @TODO: fix this rating for listings -->
+        <?php if ($listing->rating && false): ?>
         <div class="listing-rating">
-            <?php
-            $this->widget('CStarRating',
-                array(
-                    'name'=>'ratingview'.$model->id,
-                    'id'=>'ratingview'.$model->id,
-                    'value'=>intval($model->rating),
-                    'readOnly'=>true,
-                    'minRating' => Comment::MIN_RATING,
-                    'maxRating' => Comment::MAX_RATING,
-                ));
-            ?>
+            <?php StartRating::widget([
+                'name' => 'rating-' . $model->id,
+                'id' => 'rating-' . $model->id,
+                'value' => intval($listing->rating),
+                'readOnly' => true,
+                'minRating' => Comment::MIN_RATING,
+                'maxRating' => Comment::MAX_RATING,
+            ]); ?>
         </div>
         <?php endif ?>
 
         <div class="listing-stats">
         <?php if (isset($stats) && is_array($stats)) : ?>
-            <?= Yii::t('app', 'Views') ?>: <?= Yii::t('app', 'views_all') . ' ' . $stats['all'] ?>, <?= Yii::t('app', 'views_today') . ' ' . $stats['today'] . '.&nbsp;'; ?>
-            <?= '&nbsp;'. Yii::t('app', 'Date created') . ': ' . $listing->created_at; ?>
+            <?= Yii::t('app', 'Views') ?>: <?= Yii::t('app', 'views_all') . ' ' . $stats['all'] ?>, 
+            <?= Yii::t('app', 'views_today') . ' ' . $stats['today'] . '.&nbsp;' ?>
+            <?= '&nbsp;' . Yii::t('app', 'Date created') . ': ' . $listing->created_at ?>
         <?php endif; ?>
         </div>
     </header>
