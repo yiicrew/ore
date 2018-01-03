@@ -175,7 +175,12 @@ class Listing extends \yii\db\ActiveRecord
 
     public function getTitle()
     {
-        return StringHelper::truncate($this->title_en, 20);
+        return $this->title_en;
+    }
+
+    public function getTitleShort($limit = 20)
+    {
+        return StringHelper::truncate($this->title_en, $limit);
     }
 
     public function getExcerpt()
@@ -185,9 +190,20 @@ class Listing extends \yii\db\ActiveRecord
 
     public function getUrl()
     {
-        return Url::toRoute(['listing/view',
+        return Url::toRoute([
+            'listing/view',
             'id' => $this->id,
             'slug' => Inflector::slug($this->title_en),
+        ]);
+    }
+
+    public function getPrintUrl()
+    {
+        return Url::toRoute([
+            'listing/view',
+            'id' => $this->id,
+            'slug' => Inflector::slug($this->title_en),
+            'print' => true
         ]);
     }
 
