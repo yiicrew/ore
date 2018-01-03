@@ -601,11 +601,11 @@ DROP TABLE IF EXISTS `field_categories`;
 CREATE TABLE `field_categories` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `type` tinyint(2) NOT NULL DEFAULT '1',
-  `title_en` varchar(255) NOT NULL,
   `style` enum('column1','column2','column3') NOT NULL DEFAULT 'column1',
   `sort_order` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `title_en` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `date_updated` (`created_at`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
@@ -617,7 +617,7 @@ CREATE TABLE `field_categories` (
 
 LOCK TABLES `field_categories` WRITE;
 /*!40000 ALTER TABLE `field_categories` DISABLE KEYS */;
-INSERT INTO `field_categories` VALUES (1,1,'Comfort','column3',2,'2016-09-17 09:20:23','0000-00-00 00:00:00'),(2,1,'Bathroom','column3',4,'2016-09-17 09:20:23','0000-00-00 00:00:00'),(3,1,'Kitchen','column3',3,'2016-09-17 09:20:23','0000-00-00 00:00:00'),(4,1,'Work','column3',5,'2016-09-17 09:20:23','0000-00-00 00:00:00'),(5,1,'Security','column3',1,'2016-09-17 09:20:23','0000-00-00 00:00:00'),(7,1,'Entertainment','column3',6,'2016-09-17 09:20:23','0000-00-00 00:00:00'),(9,1,'On conditions','column1',8,'2016-09-17 09:20:23','0000-00-00 00:00:00'),(10,1,'Services','column1',7,'2016-09-17 09:20:23','0000-00-00 00:00:00');
+INSERT INTO `field_categories` VALUES (1,1,'column3',2,'2016-09-17 09:20:23','0000-00-00 00:00:00','Comfort'),(2,1,'column3',4,'2016-09-17 09:20:23','0000-00-00 00:00:00','Bathroom'),(3,1,'column3',3,'2016-09-17 09:20:23','0000-00-00 00:00:00','Kitchen'),(4,1,'column3',5,'2016-09-17 09:20:23','0000-00-00 00:00:00','Work'),(5,1,'column3',1,'2016-09-17 09:20:23','0000-00-00 00:00:00','Security'),(7,1,'column3',6,'2016-09-17 09:20:23','0000-00-00 00:00:00','Entertainment'),(9,1,'column1',8,'2016-09-17 09:20:23','0000-00-00 00:00:00','On conditions'),(10,1,'column1',7,'2016-09-17 09:20:23','0000-00-00 00:00:00','Services');
 /*!40000 ALTER TABLE `field_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -656,19 +656,20 @@ DROP TABLE IF EXISTS `field_values`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `field_values` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `category_id` int(11) NOT NULL DEFAULT '0',
-  `title_en` varchar(255) NOT NULL DEFAULT '',
-  `sorter` smallint(6) NOT NULL DEFAULT '0',
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL,
   `for_rent` tinyint(1) NOT NULL DEFAULT '1',
   `for_sale` tinyint(1) NOT NULL DEFAULT '1',
   `buy` tinyint(1) NOT NULL DEFAULT '1',
   `rent` tinyint(1) NOT NULL DEFAULT '1',
   `exchange` tinyint(1) NOT NULL DEFAULT '1',
+  `sort_order` smallint(6) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `title_en` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `reference_category_id` (`category_id`),
-  KEY `date_updated` (`updated_at`)
+  KEY `date_updated` (`created_at`)
 ) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -678,7 +679,7 @@ CREATE TABLE `field_values` (
 
 LOCK TABLES `field_values` WRITE;
 /*!40000 ALTER TABLE `field_values` DISABLE KEYS */;
-INSERT INTO `field_values` VALUES (1,1,'dryer for linen',1,1,0,0,1,1,'2017-09-15 08:41:40'),(2,1,'plastic windows',2,1,1,1,1,1,'2016-09-17 06:27:52'),(3,1,'dense curtains for a comfortable dream',3,1,0,0,1,1,'2017-09-15 08:41:40'),(4,1,'splendid view',4,1,1,1,1,1,'2016-09-17 06:27:52'),(5,1,'quiet area',5,1,1,1,1,1,'2016-09-17 06:27:52'),(6,1,'iron',6,1,0,0,1,1,'2017-09-15 08:41:40'),(7,1,'ironing table',7,1,0,0,1,1,'2017-09-15 08:41:40'),(8,1,'slippers',8,1,0,0,1,1,'2017-09-15 08:41:40'),(9,1,'snack Pack at arrival (a water bottle, croissants, crackers etc.)',9,1,0,0,1,1,'2017-09-15 08:41:40'),(10,2,'separate bathroom',1,1,1,1,1,1,'2016-09-17 06:27:52'),(11,2,'washing machine',2,1,1,1,1,1,'2016-09-17 06:27:52'),(12,2,'bath',3,1,1,1,1,1,'2016-09-17 06:27:52'),(13,2,'water heater',4,1,1,1,1,1,'2016-09-17 06:27:52'),(14,2,'hairdryer',5,1,0,0,1,1,'2017-09-15 08:41:40'),(15,2,'soap',6,1,0,0,1,1,'2017-09-15 08:41:40'),(16,2,'shampoo',7,1,0,0,1,1,'2017-09-15 08:41:40'),(17,2,'shower gel',8,1,0,0,1,1,'2017-09-15 08:41:40'),(18,3,'everything for cooking',1,1,0,0,1,1,'2017-09-15 08:41:40'),(19,3,'water filter',2,1,0,0,1,1,'2017-09-15 08:41:40'),(20,3,'electric kettle',3,1,0,0,1,1,'2017-09-15 08:41:40'),(21,3,'everything for food intake',4,1,0,0,1,1,'2017-09-15 08:41:40'),(22,3,'tea, coffee, sugar',5,1,0,0,1,1,'2017-09-15 08:41:40'),(23,3,'3-person dining table',6,1,0,0,1,1,'2017-09-15 08:41:40'),(24,3,'microwave oven',7,1,0,0,1,1,'2017-09-15 08:41:40'),(25,3,'extract',8,1,1,1,1,1,'2016-09-17 06:31:08'),(26,3,'plate',9,1,1,1,1,1,'2016-09-17 06:31:08'),(27,3,'refrigerator',10,1,1,1,1,1,'2016-09-17 06:31:08'),(28,4,'long distance and international calls (up to $2 per day) are included in price',1,1,0,0,1,1,'2017-09-15 08:41:40'),(29,4,'phone',2,1,0,0,1,1,'2017-09-15 08:41:40'),(30,4,'unlimited high-speed Internet is included in price',3,1,0,0,1,1,'2017-09-15 08:41:40'),(31,4,'working table',4,1,0,0,1,1,'2017-09-15 08:41:40'),(32,5,'coded lock',1,1,1,1,1,1,'2016-09-17 06:31:08'),(33,5,'metal door to the vestibule',2,1,1,1,1,1,'2016-09-17 06:31:08'),(34,5,'metal front door',3,1,1,1,1,1,'2016-09-17 06:32:25'),(35,1,'intercom',10,1,1,1,1,1,'2016-09-17 06:32:25'),(36,7,'cable TV',1,1,0,0,1,1,'2017-09-15 08:41:40'),(37,7,'DVD player',2,1,0,0,1,1,'2017-09-15 08:41:40'),(38,7,'satellite TV',3,1,0,0,1,1,'2017-09-15 08:41:40'),(39,7,'TV',4,1,0,0,1,1,'2017-09-15 08:41:40'),(40,9,'Early checking in (till 2.00 p.m.) and late checking out (after 12.00 noon) are charged 50 % of daily rate.',1,1,0,0,1,1,'2017-09-15 08:41:40'),(41,9,'The minimum period of accommodation is two days.',2,1,0,0,1,1,'2017-09-15 08:41:40'),(42,9,'Accommodation for pets isn\'t allowed.',3,1,0,0,1,1,'2017-09-15 08:41:40'),(43,10,'Cleaning is included in price: Each working day, according to the timetable placed in the apartment.',1,1,0,0,1,1,'2017-09-15 08:41:40'),(44,10,'Change of linen and towels is included in price: Once in four days.',2,1,0,0,1,1,'2017-09-15 08:41:40'),(45,10,'The prices are specified in USD. You can find the current rate of a currency exchange on the site of the Central Bank of the Russian Federation.',3,1,1,1,1,1,'2016-09-17 06:33:03');
+INSERT INTO `field_values` VALUES (1,1,1,0,0,1,1,1,'2017-09-15 08:41:40','0000-00-00 00:00:00','dryer for linen'),(2,1,1,1,1,1,1,2,'2016-09-17 06:27:52','0000-00-00 00:00:00','plastic windows'),(3,1,1,0,0,1,1,3,'2017-09-15 08:41:40','0000-00-00 00:00:00','dense curtains for a comfortable dream'),(4,1,1,1,1,1,1,4,'2016-09-17 06:27:52','0000-00-00 00:00:00','splendid view'),(5,1,1,1,1,1,1,5,'2016-09-17 06:27:52','0000-00-00 00:00:00','quiet area'),(6,1,1,0,0,1,1,6,'2017-09-15 08:41:40','0000-00-00 00:00:00','iron'),(7,1,1,0,0,1,1,7,'2017-09-15 08:41:40','0000-00-00 00:00:00','ironing table'),(8,1,1,0,0,1,1,8,'2017-09-15 08:41:40','0000-00-00 00:00:00','slippers'),(9,1,1,0,0,1,1,9,'2017-09-15 08:41:40','0000-00-00 00:00:00','snack Pack at arrival (a water bottle, croissants, crackers etc.)'),(10,2,1,1,1,1,1,1,'2016-09-17 06:27:52','0000-00-00 00:00:00','separate bathroom'),(11,2,1,1,1,1,1,2,'2016-09-17 06:27:52','0000-00-00 00:00:00','washing machine'),(12,2,1,1,1,1,1,3,'2016-09-17 06:27:52','0000-00-00 00:00:00','bath'),(13,2,1,1,1,1,1,4,'2016-09-17 06:27:52','0000-00-00 00:00:00','water heater'),(14,2,1,0,0,1,1,5,'2017-09-15 08:41:40','0000-00-00 00:00:00','hairdryer'),(15,2,1,0,0,1,1,6,'2017-09-15 08:41:40','0000-00-00 00:00:00','soap'),(16,2,1,0,0,1,1,7,'2017-09-15 08:41:40','0000-00-00 00:00:00','shampoo'),(17,2,1,0,0,1,1,8,'2017-09-15 08:41:40','0000-00-00 00:00:00','shower gel'),(18,3,1,0,0,1,1,1,'2017-09-15 08:41:40','0000-00-00 00:00:00','everything for cooking'),(19,3,1,0,0,1,1,2,'2017-09-15 08:41:40','0000-00-00 00:00:00','water filter'),(20,3,1,0,0,1,1,3,'2017-09-15 08:41:40','0000-00-00 00:00:00','electric kettle'),(21,3,1,0,0,1,1,4,'2017-09-15 08:41:40','0000-00-00 00:00:00','everything for food intake'),(22,3,1,0,0,1,1,5,'2017-09-15 08:41:40','0000-00-00 00:00:00','tea, coffee, sugar'),(23,3,1,0,0,1,1,6,'2017-09-15 08:41:40','0000-00-00 00:00:00','3-person dining table'),(24,3,1,0,0,1,1,7,'2017-09-15 08:41:40','0000-00-00 00:00:00','microwave oven'),(25,3,1,1,1,1,1,8,'2016-09-17 06:31:08','0000-00-00 00:00:00','extract'),(26,3,1,1,1,1,1,9,'2016-09-17 06:31:08','0000-00-00 00:00:00','plate'),(27,3,1,1,1,1,1,10,'2016-09-17 06:31:08','0000-00-00 00:00:00','refrigerator'),(28,4,1,0,0,1,1,1,'2017-09-15 08:41:40','0000-00-00 00:00:00','long distance and international calls (up to $2 per day) are included in price'),(29,4,1,0,0,1,1,2,'2017-09-15 08:41:40','0000-00-00 00:00:00','phone'),(30,4,1,0,0,1,1,3,'2017-09-15 08:41:40','0000-00-00 00:00:00','unlimited high-speed Internet is included in price'),(31,4,1,0,0,1,1,4,'2017-09-15 08:41:40','0000-00-00 00:00:00','working table'),(32,5,1,1,1,1,1,1,'2016-09-17 06:31:08','0000-00-00 00:00:00','coded lock'),(33,5,1,1,1,1,1,2,'2016-09-17 06:31:08','0000-00-00 00:00:00','metal door to the vestibule'),(34,5,1,1,1,1,1,3,'2016-09-17 06:32:25','0000-00-00 00:00:00','metal front door'),(35,1,1,1,1,1,1,10,'2016-09-17 06:32:25','0000-00-00 00:00:00','intercom'),(36,7,1,0,0,1,1,1,'2017-09-15 08:41:40','0000-00-00 00:00:00','cable TV'),(37,7,1,0,0,1,1,2,'2017-09-15 08:41:40','0000-00-00 00:00:00','DVD player'),(38,7,1,0,0,1,1,3,'2017-09-15 08:41:40','0000-00-00 00:00:00','satellite TV'),(39,7,1,0,0,1,1,4,'2017-09-15 08:41:40','0000-00-00 00:00:00','TV'),(40,9,1,0,0,1,1,1,'2017-09-15 08:41:40','0000-00-00 00:00:00','Early checking in (till 2.00 p.m.) and late checking out (after 12.00 noon) are charged 50 % of daily rate.'),(41,9,1,0,0,1,1,2,'2017-09-15 08:41:40','0000-00-00 00:00:00','The minimum period of accommodation is two days.'),(42,9,1,0,0,1,1,3,'2017-09-15 08:41:40','0000-00-00 00:00:00','Accommodation for pets isn\'t allowed.'),(43,10,1,0,0,1,1,1,'2017-09-15 08:41:40','0000-00-00 00:00:00','Cleaning is included in price: Each working day, according to the timetable placed in the apartment.'),(44,10,1,0,0,1,1,2,'2017-09-15 08:41:40','0000-00-00 00:00:00','Change of linen and towels is included in price: Once in four days.'),(45,10,1,1,1,1,1,3,'2016-09-17 06:33:03','0000-00-00 00:00:00','The prices are specified in USD. You can find the current rate of a currency exchange on the site of the Central Bank of the Russian Federation.');
 /*!40000 ALTER TABLE `field_values` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -691,25 +692,25 @@ DROP TABLE IF EXISTS `fields`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fields` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `feature_id` int(11) unsigned NOT NULL,
+  `field_id` int(11) unsigned NOT NULL,
   `name` varchar(128) NOT NULL,
   `type` tinyint(1) NOT NULL DEFAULT '2',
   `standard_type` tinyint(1) NOT NULL DEFAULT '0',
   `compare_type` tinyint(1) NOT NULL DEFAULT '0',
   `rules` tinyint(1) NOT NULL DEFAULT '0',
-  `measure_unit` varchar(30) NOT NULL DEFAULT '',
+  `measure_unit` varchar(32) NOT NULL DEFAULT '',
   `view_in` tinyint(1) NOT NULL DEFAULT '1',
   `not_hide` tinyint(1) NOT NULL DEFAULT '0',
   `data` text,
-  `sort_order` int(11) NOT NULL DEFAULT '0',
   `is_i18n` tinyint(1) NOT NULL DEFAULT '0',
   `is_visible` tinyint(1) NOT NULL DEFAULT '0',
+  `sort_order` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL,
+  `updated_at` datetime NOT NULL,
   `hint_en` varchar(255) NOT NULL DEFAULT '',
   `label_en` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
-  KEY `reference_id` (`feature_id`)
+  KEY `reference_id` (`field_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -719,7 +720,7 @@ CREATE TABLE `fields` (
 
 LOCK TABLES `fields` WRITE;
 /*!40000 ALTER TABLE `fields` DISABLE KEYS */;
-INSERT INTO `fields` VALUES (1,0,'num_of_rooms',2,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\"]}',12,0,0,'2016-02-01 06:13:48','2016-02-01 02:13:48','',''),(2,0,'floor_all',2,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',13,0,0,'2016-02-01 06:13:48','2015-09-28 23:52:52','',''),(4,0,'square',2,1,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',14,0,0,'2016-02-01 06:13:48','2016-09-17 07:05:49','Separators are \".\".',''),(5,0,'window_to',2,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',15,0,0,'2016-02-01 06:13:48','2015-09-28 23:52:52','',''),(6,0,'berths',2,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',16,0,0,'2016-02-01 06:13:48','2015-09-28 23:52:52','',''),(7,0,'address',2,1,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',7,1,0,'2016-02-01 06:13:48','2015-09-28 23:52:51','',''),(8,0,'description_near',3,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',15,1,0,'2016-02-01 06:13:48','2015-09-28 23:33:35','',''),(9,0,'description',4,1,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',11,1,0,'2016-02-01 06:13:48','2015-09-28 23:52:51','',''),(10,0,'references',2,2,0,0,'',2,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',10,0,0,'2016-02-01 06:13:48','2015-09-08 04:15:46','',''),(11,0,'note',3,1,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',17,0,2,'2016-02-01 06:13:48','2016-09-17 07:05:58','The note will be shown only to you and to the administrator',''),(12,0,'phone',2,1,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',18,0,0,'2016-02-01 06:13:48','2016-09-17 07:06:07','If you do not specify your phone number here, the phone number from the profile will be shown on the listings page',''),(13,0,'land_square',2,1,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',19,0,0,'2016-02-01 06:13:48','2016-09-17 07:06:13','Separators are \".\".',''),(14,0,'type',0,2,0,0,'',1,1,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',1,0,0,'2015-09-08 09:35:06','2016-09-17 07:06:24','','Type'),(15,0,'price',0,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\"]}',8,0,0,'2015-09-08 09:36:17','2016-09-17 07:06:31','','Price'),(16,0,'location',0,2,0,0,'',1,1,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',5,0,0,'2016-02-01 06:13:48','2016-09-17 07:06:41','','Location'),(17,0,'title',2,1,0,0,'',1,1,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',9,1,0,'2015-09-08 10:01:55','2015-09-28 23:52:51','',''),(18,0,'category_id',0,2,0,0,'',1,1,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',2,0,0,'2015-09-29 03:27:27','2016-09-17 07:06:48','','Property type'),(19,0,'parent_id',0,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',3,0,0,'2015-09-29 03:49:27','2015-09-28 23:52:51','',''),(20,0,'metro_stations',2,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',6,0,0,'2015-10-31 18:00:00','2015-11-01 04:00:01','','');
+INSERT INTO `fields` VALUES (1,0,'room_count',2,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\"]}',0,0,12,'2016-02-01 06:13:48','2016-02-01 06:13:48','',''),(2,0,'floor_all',2,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',0,0,13,'2016-02-01 06:13:48','2015-09-29 03:52:52','',''),(4,0,'square',2,1,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',0,0,14,'2016-02-01 06:13:48','2016-09-17 11:05:49','Separators are \".\".',''),(5,0,'window_to',2,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',0,0,15,'2016-02-01 06:13:48','2015-09-29 03:52:52','',''),(6,0,'berths',2,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',0,0,16,'2016-02-01 06:13:48','2015-09-29 03:52:52','',''),(7,0,'address',2,1,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',1,0,7,'2016-02-01 06:13:48','2015-09-29 03:52:51','',''),(8,0,'near_by',3,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',1,0,15,'2016-02-01 06:13:48','2015-09-29 03:33:35','',''),(9,0,'description',4,1,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',1,0,11,'2016-02-01 06:13:48','2015-09-29 03:52:51','',''),(10,0,'references',2,2,0,0,'',2,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',0,0,10,'2016-02-01 06:13:48','2015-09-08 08:15:46','',''),(11,0,'notes',3,1,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',0,2,17,'2016-02-01 06:13:48','2016-09-17 11:05:58','The note will be shown only to you and to the administrator',''),(12,0,'phone',2,1,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',0,0,18,'2016-02-01 06:13:48','2016-09-17 11:06:07','If you do not specify your phone number here, the phone number from the profile will be shown on the listings page',''),(13,0,'land_square',2,1,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',0,0,19,'2016-02-01 06:13:48','2016-09-17 11:06:13','Separators are \".\".',''),(14,0,'type',0,2,0,0,'',1,1,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',0,0,1,'2015-09-08 09:35:06','2016-09-17 11:06:24','','Type'),(15,0,'price',0,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\"]}',0,0,8,'2015-09-08 09:36:17','2016-09-17 11:06:31','','Price'),(16,0,'location',0,2,0,0,'',1,1,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',0,0,5,'2016-02-01 06:13:48','2016-09-17 11:06:41','','Location'),(17,0,'title',2,1,0,0,'',1,1,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',1,0,9,'2015-09-08 10:01:55','2015-09-29 03:52:51','',''),(18,0,'category_id',0,2,0,0,'',1,1,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',0,0,2,'2015-09-29 03:27:27','2016-09-17 11:06:48','','Category'),(19,0,'parent_id',0,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',0,0,3,'2015-09-29 03:49:27','2015-09-29 03:52:51','',''),(20,0,'metro_stations',2,2,0,0,'',1,0,'{\"type\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}',0,0,6,'2015-10-31 18:00:00','2015-11-01 08:00:01','','');
 /*!40000 ALTER TABLE `fields` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -820,7 +821,7 @@ CREATE TABLE `listings` (
   `city_id` int(11) unsigned NOT NULL DEFAULT '0',
   `view_count` int(11) unsigned NOT NULL DEFAULT '0',
   `activity_always` tinyint(1) NOT NULL DEFAULT '0',
-  `activity_end_at` datetime DEFAULT NULL,
+  `activity_ended_at` datetime DEFAULT NULL,
   `manual_updated_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -1495,4 +1496,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-03 18:49:26
+-- Dump completed on 2018-01-03 23:11:42
