@@ -61,6 +61,8 @@ $this->params['breadcrumbs'] = [
         </div>
     </header>
 
+    <?php $this->render('_view', ['listing' => $listing]); ?>
+
     <?= $listing->description_en ?>
 </section>
 

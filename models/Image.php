@@ -73,4 +73,16 @@ class Image extends \yii\db\ActiveRecord
     {
         return Url::to('/uploads/listings/' . $this->listing_id . '/modified/full_' . $this->public_path);
     }
+
+    public function getThumb()
+    {
+        ['alt' => $alt, 'thumbUrl' => $thumbUrl, 'link' => $link] = Images::getMainThumb(300, 200, $data->images);
+        $alt = $alt ?? $this->hTitle;
+        $image = Html::img($thumbUrl, $alt);
+        if ($link) {
+            return Html::a($image, $link, ['title' => $alt]);
+        }
+
+        return $image;
+    }
 }

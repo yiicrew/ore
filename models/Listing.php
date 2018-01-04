@@ -157,13 +157,13 @@ class Listing extends \yii\db\ActiveRecord
     public function getImages()
     {
         return $this->hasMany(Image::class, ['id' => 'listing_id'])
-                ->orderBy('is_default DESC, sort_order');
+            ->orderBy('is_default DESC, sort_order');
     }
 
     public function getImage()
     {
         return $this->hasOne(Image::class, ['listing_id' => 'id'])
-                ->default();
+            ->default();
     }
 
     public function getCity()
@@ -171,9 +171,19 @@ class Listing extends \yii\db\ActiveRecord
         return $this->hasOne(City::class, ['id' => 'city_id']);
     }
 
+    public function getCategory()
+    {
+        return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+
     public function getTitle()
     {
         return $this->title_en;
+    }
+
+    public function getHTitle()
+    {
+        return Html::encode($this->title_e);
     }
 
     public function getTitleShort($limit = 20)
@@ -237,5 +247,10 @@ class Listing extends \yii\db\ActiveRecord
     public function getMetaDescription()
     {
         return StringHelper::truncate($this->description_en, 20);
+    }
+
+    public function getType()
+    {
+        return $this->type_id;
     }
 }
