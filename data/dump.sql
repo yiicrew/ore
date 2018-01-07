@@ -28,7 +28,7 @@ CREATE TABLE `article_categories` (
   `status` tinyint(2) NOT NULL DEFAULT '1',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `name_en` varchar(255) NOT NULL DEFAULT '',
+  `name_en` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx-article_categories-created_at` (`created_at`),
   KEY `idx-article_categories-status` (`status`)
@@ -221,19 +221,14 @@ DROP TABLE IF EXISTS `carousel_images`;
 CREATE TABLE `carousel_images` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `carousel_id` int(11) unsigned NOT NULL,
-  `status` tinyint(2) NOT NULL,
-  `sort_order` int(11) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `title_ru` varchar(255) NOT NULL,
-  `text_ru` text NOT NULL,
+  `status` tinyint(2) NOT NULL DEFAULT '1',
+  `sort_order` int(11) NOT NULL DEFAULT '0',
+  `path` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL,
   `title_en` varchar(255) NOT NULL,
   `title_de` varchar(255) NOT NULL,
-  `title_es` varchar(255) NOT NULL,
-  `title_ar` varchar(255) NOT NULL,
   `text_en` text NOT NULL,
   `text_de` text NOT NULL,
-  `text_es` text NOT NULL,
-  `text_ar` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -257,7 +252,7 @@ DROP TABLE IF EXISTS `carousels`;
 CREATE TABLE `carousels` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `status` tinyint(2) NOT NULL,
+  `status` tinyint(2) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -282,13 +277,12 @@ DROP TABLE IF EXISTS `categories`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categories` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `parent_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `parent_id` int(11) unsigned DEFAULT NULL,
   `image_path` varchar(255) DEFAULT NULL,
   `icon_path` varchar(255) DEFAULT NULL,
-  `sort_order` int(11) unsigned NOT NULL DEFAULT '0',
+  `sort_order` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `type` tinyint(1) NOT NULL,
   `name_en` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
@@ -300,7 +294,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,5,'apartment.png',NULL,1,'2017-12-09 23:12:19','2016-09-17 09:10:38',1,'apartment'),(2,0,'house.png',NULL,3,'2017-12-09 23:12:19','2016-09-17 09:10:38',1,'house'),(3,0,'commercial.png',NULL,2,'2017-12-09 23:12:19','2016-09-17 09:10:38',2,'commercial real estate'),(4,0,'',NULL,4,'2017-12-09 23:12:19','2016-09-17 09:10:38',1,'land plot'),(5,0,'',NULL,5,'2017-12-09 23:12:19','2016-09-17 09:10:38',0,'apartment house'),(6,0,'',NULL,6,'2017-12-09 23:12:19','2016-09-17 09:10:38',2,'hotel'),(7,6,'',NULL,7,'2017-12-09 23:12:19','2016-09-17 09:10:38',0,'hotel room');
+INSERT INTO `categories` VALUES (1,5,'apartment.png',NULL,1,'2017-12-09 23:12:19','2016-09-17 09:10:38','apartment'),(2,0,'house.png',NULL,3,'2017-12-09 23:12:19','2016-09-17 09:10:38','house'),(3,0,'commercial.png',NULL,2,'2017-12-09 23:12:19','2016-09-17 09:10:38','commercial real estate'),(4,0,'',NULL,4,'2017-12-09 23:12:19','2016-09-17 09:10:38','land plot'),(5,0,'',NULL,5,'2017-12-09 23:12:19','2016-09-17 09:10:38','apartment house'),(6,0,'',NULL,6,'2017-12-09 23:12:19','2016-09-17 09:10:38','hotel'),(7,6,'',NULL,7,'2017-12-09 23:12:19','2016-09-17 09:10:38','hotel room');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,7 +360,7 @@ DROP TABLE IF EXISTS `comments`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `comments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `parent_id` int(11) unsigned DEFAULT '0',
+  `parent_id` int(11) unsigned DEFAULT NULL,
   `user_id` int(11) unsigned NOT NULL,
   `object_id` int(11) unsigned NOT NULL,
   `object_type` varchar(64) NOT NULL,
@@ -375,7 +369,7 @@ CREATE TABLE `comments` (
   `user_email` varchar(64) NOT NULL,
   `body` text,
   `rating` tinyint(4) NOT NULL DEFAULT '0',
-  `status` tinyint(2) unsigned NOT NULL DEFAULT '0',
+  `status` tinyint(2) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -540,7 +534,7 @@ CREATE TABLE `customers` (
   `contract_number` varchar(255) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
-  `date_of_birth` varchar(255) NOT NULL,
+  `date_of_birth` date DEFAULT NULL,
   `phone` varchar(255) NOT NULL,
   `acts` text,
   `additional_info` text,
@@ -1244,7 +1238,7 @@ CREATE TABLE `stats` (
   `listing_id` int(11) unsigned NOT NULL,
   `ip_address` varchar(30) NOT NULL,
   `user_agent` varchar(255) NOT NULL,
-  `custom_fields` text NOT NULL,
+  `custom_fields` text,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `apartment_id` (`listing_id`),
@@ -1400,14 +1394,14 @@ CREATE TABLE `users` (
   `salt` varchar(128) NOT NULL,
   `avatar` varchar(128) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
+  `agency_user_id` int(11) DEFAULT NULL,
   `agency_name` varchar(128) DEFAULT NULL,
   `agent_status` tinyint(1) DEFAULT NULL,
-  `custom_fields_en` text,
+  `custom_fields` text,
   `verify_token` varchar(100) NOT NULL,
   `password_reset_token` varchar(100) NOT NULL,
   `status` tinyint(2) NOT NULL DEFAULT '0',
   `balance` int(11) NOT NULL DEFAULT '0',
-  `agency_user_id` int(11) DEFAULT NULL,
   `last_login_ip` varchar(60) DEFAULT NULL,
   `last_login_at` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL,
@@ -1424,7 +1418,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,10,10,'al.razi@outlook.com','1ebb576acccc06bd19d4f0270986aeb5','alrazi','5a09dfd072fde8.59533762','','+7 000 111 1111','',0,'','','',1,0,0,'::1','2017-11-20 23:01:52','2013-11-14 05:12:12','2017-11-20 23:01:52'),(2,2,1,'demore@monoray.net','b7300769e471d88d5d0c8fa7e77f8c3e','demo','4ed36e64356867.12929158','','+7 000 111 2222','',0,'Low priced property without any intermediaries!','','',1,2493,0,'','2016-05-08 01:46:47','2013-11-14 05:12:12','2016-09-17 09:21:52');
+INSERT INTO `users` VALUES (1,10,10,'al.razi@outlook.com','1ebb576acccc06bd19d4f0270986aeb5','alrazi','5a09dfd072fde8.59533762','','+7 000 111 1111',0,'',0,'','','',1,0,'::1','2017-11-20 23:01:52','2013-11-14 05:12:12','2017-11-20 23:01:52'),(2,2,1,'demore@monoray.net','b7300769e471d88d5d0c8fa7e77f8c3e','demo','4ed36e64356867.12929158','','+7 000 111 2222',0,'',0,'Low priced property without any intermediaries!','','',1,2493,'','2016-05-08 01:46:47','2013-11-14 05:12:12','2016-09-17 09:21:52');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1492,4 +1486,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-07 18:50:05
+-- Dump completed on 2018-01-07 19:19:19
