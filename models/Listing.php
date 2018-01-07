@@ -63,6 +63,14 @@ class Listing extends \yii\db\ActiveRecord
     const STATUS_DRAFT = -1;
     const STATUS_ACTIVE = 1;
 
+    const TYPE_RENT = 1;
+    const TYPE_SALE = 2;
+    const TYPE_RENTING = 3;
+    const TYPE_BUY = 4;
+    const TYPE_CHANGE = 5;
+    const TYPE_DEFAULT = 1;
+    const TYPE_DISABLED = 13;
+
     /**
      * @inheritdoc
      */
@@ -156,7 +164,7 @@ class Listing extends \yii\db\ActiveRecord
 
     public function getImages()
     {
-        return $this->hasMany(Image::class, ['id' => 'listing_id'])
+        return $this->hasMany(Image::class, ['listing_id' => 'id'])
             ->orderBy('is_default DESC, sort_order');
     }
 
@@ -164,6 +172,11 @@ class Listing extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Image::class, ['listing_id' => 'id'])
             ->default();
+    }
+
+    public function getPanorama()
+    {
+        return null;
     }
 
     public function getCity()
@@ -252,5 +265,21 @@ class Listing extends \yii\db\ActiveRecord
     public function getType()
     {
         return $this->type_id;
+    }
+
+    public function getPrettyPrice()
+    {
+        return $this->price;
+    }
+
+    public function getDefaultPrice()
+    {
+        // if ($listing->canShowInView('price')) {
+            if ($this->is_price_poa) {
+                return Yii::t('app', 'is_price_poa');
+            } else {
+                return Yii::t('app', 'Price from') . ': ' . $this->getPrettyPrice();
+            }
+        // }
     }
 }

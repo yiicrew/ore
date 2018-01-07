@@ -17,6 +17,7 @@ use yii\helpers\Url;
  * @property integer $is_default
  * @property string $created_at
  * @property string $updated_at
+ * @property string $alt_en
  */
 class Image extends \yii\db\ActiveRecord
 {
@@ -37,7 +38,7 @@ class Image extends \yii\db\ActiveRecord
     {
         return [
             [['listing_id', 'user_id', 'sort_order', 'is_default'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'alt_en'], 'safe'],
             [['path', 'public_path'], 'string', 'max' => 255],
         ];
     }
@@ -57,6 +58,7 @@ class Image extends \yii\db\ActiveRecord
             'is_default' => Yii::t('app', 'Is Default'),
             'created_at' => Yii::t('app', 'Date Created'),
             'updated_at' => Yii::t('app', 'Date Updated'),
+            'alt_en' => Yii::t('app', 'Title'),
         ];
     }
 
@@ -84,5 +86,10 @@ class Image extends \yii\db\ActiveRecord
         }
 
         return $image;
+    }
+
+    public function getAlt()
+    {
+        return $this->alt_en;
     }
 }

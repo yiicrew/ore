@@ -29,6 +29,10 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'session' => [
+            'class' => 'yii\web\DbSession',
+            'sessionTable' => 'sessions',
+        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set

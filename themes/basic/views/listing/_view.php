@@ -1,5 +1,8 @@
 <?php
 
+use app\models\Listing;
+use app\widgets\ImageWidget;
+
 function issetModule($value)
 {
     return false;
@@ -95,20 +98,12 @@ function param($key)
                 </div>
 
                 <p class="price padding-bottom10">
-                    <?php if ($listing->canShowInView('price')): ?>
-                    <?php 
-                        if ($listing->is_price_poa) {
-                            echo Yii::t('app', 'is_price_poa');
-                        } else {
-                            echo Yii::t('app', 'Price from') . ': ' . $listing->getPrettyPrice();
-                        }
-                    ?>
-                    <?php endif ?>
+                    <?= $listing->defaultPrice ?>
                 </p>
 
                 <div class="overflow-auto">
                     <?php
-                        if(($listing->owner_id != Yii::app()->user->getId()) && $listing->type == Apartment::TYPE_RENT && !$listing->deleted){
+                        if (($listing->owner_id != Yii::$app->user->id) && $listing->type == Listing::TYPE_RENT && !$listing->deleted) {
                             echo '<div>'.CHtml::link(tt('Booking'), array('/booking/main/bookingform', 'id' => $listing->id), array('class' => 'apt_btn fancy mgp-open-ajax')).'</div><div class="clear"></div>';
                         }
 
@@ -122,68 +117,52 @@ function param($key)
                             }
                         }
                     ?>
+
                     <?php if (issetModule('comparisonList')):?>
                         <div class="clear"></div>
                         <?php
                         $inComparisonList = false;
-                        if (in_array($listing->id, Yii::app()->controller->apInComparison))
+                        if (in_array($listing->id, Yii::$app->controller->apInComparison))
                             $inComparisonList = true;
                         ?>
-                        <div class="compare-check-control view-apartment" id="compare_check_control_<?php echo $listing->id; ?>">
-                            <?php
-                            $checkedControl = '';
+                        <div class="compare-check-control view-apartment" id="compare_check_control_<?= $listing->id ?>">
+                            <input type="checkbox" name="compare-<?= $listing->id ?>" class="compare-check compare-float-left" 
+                                id="compare-check-<?= $listing->id ?>" <?= $inComparisonList ? ' checked' : '' ?>>
 
-                            if ($inComparisonList)
-                                $checkedControl = ' checked = checked ';
-                            ?>
-                            <input type="checkbox" name="compare<?php echo $listing->id; ?>" class="compare-check compare-float-left" id="compare_check<?php echo $listing->id; ?>" <?php echo $checkedControl;?>>
-
-                            <a href="<?php echo ($inComparisonList) ? Yii::app()->createUrl('comparisonList/main/index') : 'javascript:void(0);';?>" data-rel-compare="<?php echo ($inComparisonList) ? 'true' : 'false';?>" id="compare_label<?php echo $listing->id; ?>" class="compare-label">
-                                <?php echo ($inComparisonList) ? tt('In the comparison list', 'comparisonList') : tt('Add to a comparison list ', 'comparisonList');?>
+                            <a href="<?= $inComparisonList ? Url::to('comparisonList/main/index') : 'javascript:void(0);' ?>" 
+                                data-rel-compare="<?= $inComparisonList ? 'true' : 'false' ?>" id="compare-label-<?= $listing->id ?>" class="compare-label">
+                                <?= $inComparisonList ? tt('In the comparison list', 'comparisonList') : tt('Add to a comparison list ', 'comparisonList') ?>
                             </a>
                         </div>
                     <?php endif;?>
                 </div>
             </div>
 
-            <?php
-                if ($listing->images) {
-                    $this->widget('application.modules.images.components.ImagesWidget', array(
-                        'images' => $listing->images,
-                        'objectId' => $listing->id,
-                        'useFotorama' => false,
-                    ));
-                }
-            ?>
+            <?= ImageWidget::widget([
+                'images' => $listing->images,
+                'objectId' => $listing->id,
+                'useFotorama' => false
+            ]) ?>
 
         </div>
 
     </div>
 
-
-    <div class="clear"></div>
-
-    <div class="viewapartment-description">
+    <div class="listing-description">
         <?php
-            $listing->references = HApartment::getFullInformation($listing->id, $listing->type);
-            $generalContent = $this->renderPartial('//modules/apartments/views/_tab_general', array(
+            // $listing->references = HApartment::getFullInformation($listing->id, $listing->type);
+            $generalContent = $this->render('_general', array(
                 'data'=>$listing,
             ), true);
 
-            if($generalContent){
-                $items[tc('General')] = array(
+            if ($generalContent) {
+                $items[Yii::t('app', 'General')] = array(
                     'content' => $generalContent,
                     'id' => 'tab_1',
                 );
             }
 
-            if(!param('useBootstrap')){
-                Yii::app()->clientScript->scriptMap=array(
-                    'jquery-ui.css'=>false,
-                );
-            }
-
-            if(issetModule('bookingcalendar') && $listing->type == Apartment::TYPE_RENT){
+            if (issetModule('bookingcalendar') && $listing->type == Apartment::TYPE_RENT) {
                 Bookingcalendar::publishAssets();
 
                 $items[tt('The periods of booking apartment', 'bookingcalendar')] = array(
@@ -194,8 +173,8 @@ function param($key)
                 );
             }
 
-            $additionFields = HFormEditor::getExtendedFields();
-            $existValue = HFormEditor::existValueInRows($additionFields, $listing);
+            // $additionFields = HFormEditor::getExtendedFields();
+            $existValue = false; //HFormEditor::existValueInRows($additionFields, $listing);
 
             if($existValue){
                 $items[tc('Additional info')] = array(
@@ -258,9 +237,9 @@ function param($key)
                 );
             }
 
-            if ($listing->type != Apartment::TYPE_BUY && $listing->type != Apartment::TYPE_RENTING) {
-                if($listing->lat && $listing->lng){
-                    if(param('useGoogleMap', 1) || param('useYandexMap', 1) || param('useOSMMap', 1)){
+            if ($listing->type != Listing::TYPE_BUY && $listing->type != Listing::TYPE_RENTING) {
+                if($listing->lat && $listing->lon){
+                    if (param('useGoogleMap', 1) || param('useYandexMap', 1) || param('useOSMMap', 1)) {
                         $items[tc('Map')] = array(
                             'content' => $this->renderPartial('//modules/apartments/views/_tab_map', array(
                                 'data' => $listing,
@@ -271,19 +250,18 @@ function param($key)
                 }
             }
 
-            $this->widget('zii.widgets.jui.CJuiTabs', array(
+            /*$this->widget('zii.widgets.jui.CJuiTabs', array(
                 'tabs' => $items,
                 'htmlOptions' => array('class' => 'info-tabs'),
                 'headerTemplate' => '<li><a href="{url}" title="{title}" onclick="reInitMap(this);">{title}</a></li>',
                 'options' => array(
                 ),
-            ));
+            ));*/
         ?>
     </div>
 
-    <div class="clear">&nbsp;</div>
     <?php
-        if(!Yii::app()->user->checkAccess('backend_access')) {
+        if(!Yii::$app->user->can('backend_access')) {
             if (issetModule('similarads') && param('useSliderSimilarAds') == 1) {
                 Yii::import('application.modules.similarads.components.SimilarAdsWidget');
                 $ads = new SimilarAdsWidget;
@@ -291,44 +269,43 @@ function param($key)
             }
         }
 
-        Yii::app()->clientScript->registerScript('reInitMap', '
-            var useYandexMap = '.param('useYandexMap', 1).';
-            var useGoogleMap = '.param('useGoogleMap', 1).';
-            var useOSMap = '.param('useOSMMap', 1).';
-
-            function reInitMap(elem) {
-                if($(elem).attr("href") == "#tab_6"){
-                    // place code to end of queue
-                    if(useGoogleMap){
-                        setTimeout(function(){
-                            var tmpGmapCenter = mapGMap.getCenter();
-
-                            google.maps.event.trigger($("#googleMap")[0], "resize");
-                            mapGMap.setCenter(tmpGmapCenter);
-
-                            if (($("#gmap-panorama").length > 0)) {
-                                initializeGmapPanorama();
-                            }
-                        }, 0);
-                    }
-
-                    if(useYandexMap){
-                        setTimeout(function(){
-                            ymaps.ready(function () {
-                                globalYMap.container.fitToViewport();
-                                globalYMap.setCenter(globalYMap.getCenter());
-                            });
-                        }, 0);
-                    }
-
-                    if(useOSMap){
-                        setTimeout(function(){
-                            L.Util.requestAnimFrame(mapOSMap.invalidateSize,mapOSMap,!1,mapOSMap._container);
-                        }, 0);
-                    }
-                }
-            }
-        ',
-        CClientScript::POS_END);
     ?>
-<br />
+
+<script>
+var useYandexMap = '<?= param('useYandexMap', 1) ?>';
+var useGoogleMap = '<?= param('useGoogleMap', 1) ?>';
+var useOSMap = '<?= param('useOSMMap', 1) ?>';
+
+function reInitMap(elem) {
+    if($(elem).attr("href") == "#tab_6"){
+        // place code to end of queue
+        if (useGoogleMap) {
+            setTimeout(function(){
+                var tmpGmapCenter = mapGMap.getCenter();
+
+                google.maps.event.trigger($("#googleMap")[0], "resize");
+                mapGMap.setCenter(tmpGmapCenter);
+
+                if (($("#gmap-panorama").length > 0)) {
+                    initializeGmapPanorama();
+                }
+            }, 0);
+        }
+
+        if (useYandexMap) {
+            setTimeout(function(){
+                ymaps.ready(function () {
+                    globalYMap.container.fitToViewport();
+                    globalYMap.setCenter(globalYMap.getCenter());
+                });
+            }, 0);
+        }
+
+        if (useOSMap) {
+            setTimeout(function(){
+                L.Util.requestAnimFrame(mapOSMap.invalidateSize,mapOSMap,!1,mapOSMap._container);
+            }, 0);
+        }
+    }
+}
+</script>
