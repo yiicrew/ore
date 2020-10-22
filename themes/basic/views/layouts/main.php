@@ -5,8 +5,8 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use yii\bootstrap4\Nav;
+use yii\bootstrap4\NavBar;
 use app\assets\BasicAsset;
 
 BasicAsset::register($this);
@@ -40,6 +40,7 @@ BasicAsset::register($this);
             'class' => 'navbar-dark navbar-expand-lg',
         ],
     ]);
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
@@ -50,25 +51,25 @@ BasicAsset::register($this);
             ['label' => 'Find agents', 'url' => ['/site/contact']],
             ['label' => 'List your property', 'url' => ['/site/about']],
             ['label' => 'Contact us', 'url' => ['/site/about']],
-            '<li class="nav-item nav-divider">&nbsp</li>',
             [
-                'label' => 'Login', 
-                'url' => ['/site/login'], 
+                'label' => 'Login',
+                'url' => ['/site/login'],
                 'visible' => Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Sign Up', 
+                'label' => 'Sign Up',
                 'url' => ['/site/signup'],
                 'visible' => Yii::$app->user->isGuest,
                 'linkOptions' => ['class' => 'btn btn-primary navbar-btn']
             ],
             [
-                'label' => 'Logout', 'url' => ['/site/logout'], 
+                'label' => 'Logout', 'url' => ['/site/logout'],
                 'visible' => !Yii::$app->user->isGuest,
                 'linkOptions' => ['data-method' => 'post', 'class' => 'btn btn-sm btn-primary']
             ]
         ],
     ]);
+
     NavBar::end();
     ?>
 

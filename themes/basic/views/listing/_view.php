@@ -28,9 +28,9 @@ function param($key)
 <?php endif ?>
         
         <?php if (issetModule('paidservices') && param('useUserads')):?>
-            <?php 
+            <?php
                 $wantTypes = HApartment::getI18nTypesArray();
-                $typeName = (isset($wantTypes[$listing->type]) && isset($wantTypes[$listing->type]['current'])) ? mb_strtolower($wantTypes[$listing->type]['current'], 'UTF-8') : '';                
+                $typeName = (isset($wantTypes[$listing->type]) && isset($wantTypes[$listing->type]['current'])) ? mb_strtolower($wantTypes[$listing->type]['current'], 'UTF-8') : '';
             ?>
             <?php if ($typeName) :?>
                 <div class="promotion-paidservices-in-apartment">
@@ -60,7 +60,7 @@ function param($key)
             </div>
 
             <div class="viewapartment-description-top">
-                <?php if ($listing->isDeleted): ?>
+                <?php if ($listing->deleted): ?>
                     <div class="badge badge-danger"><?= Yii::t('app', 'Listing is deleted') ?></div>
                 <?php endif ?>
                 <div>
@@ -80,8 +80,9 @@ function param($key)
                                 echo $listing->locCountry->getStrByLang('name');
                             }
                             if ($listing->locRegion) {
-                                if($listing->locCountry)
+                                if ($listing->locCountry) {
                                     echo ',&nbsp;';
+                                }
                                 echo $listing->locRegion->getStrByLang('name');
                             }
                             if ($listing->locCity) {
@@ -108,8 +109,8 @@ function param($key)
                         }
 
 
-                        if(issetModule('apartmentsComplain')){
-                            if(($listing->owner_id != Yii::app()->user->getId())){ ?>
+                        if (issetModule('apartmentsComplain')) {
+                            if (($listing->owner_id != Yii::app()->user->getId())) { ?>
                                 <div>
                                     <?php echo CHtml::link(tt('do_complain', 'apartmentsComplain'), $this->createUrl('/apartmentsComplain/main/complain', array('id' => $listing->id)), array('class' => 'fancy mgp-open-ajax')); ?>
                                 </div>
@@ -122,8 +123,9 @@ function param($key)
                         <div class="clear"></div>
                         <?php
                         $inComparisonList = false;
-                        if (in_array($listing->id, Yii::$app->controller->apInComparison))
+                        if (in_array($listing->id, Yii::$app->controller->apInComparison)) {
                             $inComparisonList = true;
+                        }
                         ?>
                         <div class="compare-check-control view-apartment" id="compare_check_control_<?= $listing->id ?>">
                             <input type="checkbox" name="compare-<?= $listing->id ?>" class="compare-check compare-float-left" 
@@ -176,7 +178,7 @@ function param($key)
             // $additionFields = HFormEditor::getExtendedFields();
             $existValue = false; //HFormEditor::existValueInRows($additionFields, $listing);
 
-            if($existValue){
+            if ($existValue) {
                 $items[tc('Additional info')] = array(
                     'content' => $this->renderPartial('//modules/apartments/views/_tab_addition', array(
                         'data'=>$listing,
@@ -186,7 +188,7 @@ function param($key)
                 );
             }
 
-            if ($listing->panorama){
+            if ($listing->panorama) {
                 $items[tc('Panorama')] = array(
                     'content' => $this->renderPartial('//modules/apartments/views/_tab_panorama', array(
                         'data'=>$listing,
@@ -195,7 +197,7 @@ function param($key)
                 );
             }
 
-            if (isset($listing->video) && $listing->video){
+            if (isset($listing->video) && $listing->video) {
                 $items[tc('Videos for listing')] = array(
                     'content' => $this->renderPartial('//modules/apartments/views/_tab_video', array(
                         'data'=>$listing,
@@ -215,12 +217,12 @@ function param($key)
             }*/
 
 
-            if(param('enableCommentsForApartments', 1)){
-                if(!isset($comment)){
+            if (param('enableCommentsForApartments', 1)) {
+                if (!isset($comment)) {
                     $comment = null;
                 }
 
-                $items[Yii::t('module_comments','Comments').' ('.Comment::countForModel('Apartment', $listing->id).')'] = array(
+                $items[Yii::t('module_comments', 'Comments').' ('.Comment::countForModel('Apartment', $listing->id).')'] = array(
                     'content' => $this->renderPartial('//modules/apartments/views/_tab_comments', array(
                         'model' => $listing,
                     ), true),
@@ -228,7 +230,7 @@ function param($key)
                 );
             }
             
-            if(isset($listing->apDocuments) && count($listing->apDocuments)){
+            if (isset($listing->apDocuments) && count($listing->apDocuments)) {
                 $items[tc('Documents')] = array(
                     'content' => $this->renderPartial('//modules/apartments/views/__table_documents_view', array(
                             'apartment' => $listing,
@@ -238,7 +240,7 @@ function param($key)
             }
 
             if ($listing->type != Listing::TYPE_BUY && $listing->type != Listing::TYPE_RENTING) {
-                if($listing->lat && $listing->lon){
+                if ($listing->lat && $listing->lon) {
                     if (param('useGoogleMap', 1) || param('useYandexMap', 1) || param('useOSMMap', 1)) {
                         $items[tc('Map')] = array(
                             'content' => $this->renderPartial('//modules/apartments/views/_tab_map', array(
@@ -261,7 +263,7 @@ function param($key)
     </div>
 
     <?php
-        if(!Yii::$app->user->can('backend_access')) {
+        if (!Yii::$app->user->can('backend_access')) {
             if (issetModule('similarads') && param('useSliderSimilarAds') == 1) {
                 Yii::import('application.modules.similarads.components.SimilarAdsWidget');
                 $ads = new SimilarAdsWidget;

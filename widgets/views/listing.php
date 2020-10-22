@@ -6,7 +6,7 @@
             <div class="card listing" data-id="<?= $listing->id ?>">
                 <img class="card-img-top" src="<?= $listing->image ?>" height="200" alt="Card image cap">
                 <div class="card-body listing-details">
-                    <h4 class="card-title listing-title"><?= $listing->titleShort ?></h4>
+                    <h4 class="card-title listing-title"><?= $listing->title ?></h4>
                     <h6 class="card-subtitle listing-price mb-2 text-muted">
                         $<?= $listing->price ?> per month
                     </h6>

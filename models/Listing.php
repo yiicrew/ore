@@ -194,16 +194,6 @@ class Listing extends \yii\db\ActiveRecord
         return $this->title_en;
     }
 
-    public function getHTitle()
-    {
-        return Html::encode($this->title_e);
-    }
-
-    public function getTitleShort($limit = 20)
-    {
-        return StringHelper::truncate($this->title_en, $limit);
-    }
-
     public function getExcerpt()
     {
         return StringHelper::truncate($this->description_en, 30);
@@ -232,17 +222,19 @@ class Listing extends \yii\db\ActiveRecord
     {
         if (Yii::$app->user->can('admin_access')) {
             return Url::to(['/admin/listing/update', 'id' => $this->id]);
-        } elseif ($this->isOwner && !$this->isDeleted) {
+        }
+        
+        if ($this->owner && !$this->deleted) {
             return Url::to(['/account/listing/update', 'id' => $this->id]);
         }
     }
 
-    public function getIsOwner()
+    public function getOwner()
     {
         return true;
     }
 
-    public function getIsDeleted()
+    public function getDeleted()
     {
         return isset($this->deleted_at);
     }
@@ -250,6 +242,7 @@ class Listing extends \yii\db\ActiveRecord
     public function getMetaTitle()
     {
         $title = $this->title_en;
+
         if (isset($this->city) && isset($this->city->name)) {
             $title .= ', ' . Yii::t('app', 'City') . ' ' . $this->city->name;
         }
@@ -257,7 +250,7 @@ class Listing extends \yii\db\ActiveRecord
         return $title;
     }
 
-    public function getMetaDescription()
+    public function getDescription()
     {
         return StringHelper::truncate($this->description_en, 20);
     }
@@ -275,11 +268,11 @@ class Listing extends \yii\db\ActiveRecord
     public function getDefaultPrice()
     {
         // if ($listing->canShowInView('price')) {
-            if ($this->is_price_poa) {
-                return Yii::t('app', 'is_price_poa');
-            } else {
-                return Yii::t('app', 'Price from') . ': ' . $this->getPrettyPrice();
-            }
+        if ($this->is_price_poa) {
+            return Yii::t('app', 'is_price_poa');
+        } else {
+            return Yii::t('app', 'Price from') . ': ' . $this->getPrettyPrice();
+        }
         // }
     }
 }

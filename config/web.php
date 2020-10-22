@@ -12,9 +12,6 @@ $config = [
         '@themes' => '@app/themes',
     ],
     'components' => [
-        'simplepie' => [
-            'class' => 'yiicrew\simplepie\SimplePie'
-        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'PdZ3XsYRYlhZ1WAZfXiYmz-hmf0YQa6B',

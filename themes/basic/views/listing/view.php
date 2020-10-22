@@ -8,15 +8,16 @@ $searchUrl = Yii::$app->session->get('searchUrl');
 $isSearchPage = stripos(Yii::$app->request->referrer, Yii::$app->urlManager->getBaseUrl(true));
 
 $this->title = $listing->metaTitle;
-$this->params['description'] = $listing->metaDescription;
+$this->params['description'] = $listing->description;
 $this->params['breadcrumbs'] = [
-	[
-		'label' => Yii::t('app', 'Apartment search'),
-		'url' => $searchUrl ?? ['/quicksearch/main/mainsearch']
-	],
-    $listing->titleShort
+    [
+        'label' => Yii::t('app', 'Apartment search'),
+        'url' => $searchUrl ?? ['/quicksearch/main/mainsearch']
+    ],
+    $listing->title
 ];
 ?>
+
 <section class="listing">
     <header class="listing-header">
         <div class="listing-toolbar list">
@@ -38,6 +39,7 @@ $this->params['breadcrumbs'] = [
         </div>
 
         <h1 class="listing-title"><?= $listing->title ?></h1>
+        
         <!-- @TODO: fix this rating for listings -->
         <?php if ($listing->rating && false): ?>
         <div class="listing-rating">
